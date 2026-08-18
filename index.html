@@ -1,1412 +1,2660 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
 
-  <title>Yonas Nickee | Editor & Music Producer</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="Yonas Nickee — Intermediate Editor, Music Producer and Content Creator."
-  />
+<title>Yonas Nickee | Editor • Music Producer</title>
 
-  <meta
-    name="keywords"
-    content="Yonas Nickee, Yonas Editz, Video Editor, Music Producer, Content Creator"
-  />
+<meta name="description"
+      content="Yonas Nickee — Intermediate Editor, Music Producer and Creator.">
 
-  <meta name="author" content="Yonas Nickee" />
+<meta name="keywords"
+      content="Yonas Nickee, Yonas Editz, Video Editor, Music Producer, Creator">
 
-  <meta name="theme-color" content="#08000f" />
+<meta name="author" content="Yonas Nickee">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#05000d">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&family=Pacifico&display=swap"
-    rel="stylesheet"
-  />
+<!-- =====================================================
+     FONTS
+===================================================== -->
 
-  <style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-    /* =========================================================
-       RESET
-    ========================================================= */
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&display=swap"
+      rel="stylesheet">
 
-    html {
-      scroll-behavior: smooth;
-    }
 
-    body {
-      background: #050008;
-      color: white;
-      font-family: "Inter", sans-serif;
-      overflow-x: hidden;
-    }
+<!-- =====================================================
+     THREE.JS
+===================================================== -->
 
-    body.locked {
-      overflow: hidden;
-    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
 
-    /* =========================================================
-       GLOBAL BACKGROUND
-    ========================================================= */
+<style>
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.06;
+/* =====================================================
+   RESET
+===================================================== */
 
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 2px,
-          rgba(255,255,255,0.08) 3px
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#030006;
+    color:#fff;
+    font-family:"Inter",sans-serif;
+    overflow-x:hidden;
+}
+
+body.locked{
+    overflow:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =====================================================
+   CUSTOM CURSOR LIGHT
+===================================================== */
+
+.cursor-light{
+
+    position:fixed;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(174,48,255,.16),
+            rgba(0,200,255,.06) 35%,
+            transparent 70%
         );
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    z-index:9998;
+
+    filter:blur(15px);
+
+}
+
+
+/* =====================================================
+   NOISE
+===================================================== */
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:9997;
+
+    opacity:.035;
+
+    background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.bg-orb{
+
+    position:fixed;
+
+    width:650px;
+    height:650px;
+
+    border-radius:50%;
+
+    filter:blur(160px);
+
+    pointer-events:none;
+
+    z-index:-5;
+
+}
+
+.bg-orb.one{
+
+    background:#7c00ff;
+
+    top:-300px;
+    left:-300px;
+
+    opacity:.28;
+
+}
+
+.bg-orb.two{
+
+    background:#00d9ff;
+
+    right:-350px;
+    top:25%;
+
+    opacity:.14;
+
+}
+
+.bg-orb.three{
+
+    background:#ff00c8;
+
+    bottom:-350px;
+    left:25%;
+
+    opacity:.16;
+
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+#particles{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-2;
+
+}
+
+.particle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:#c36cff;
+
+    box-shadow:
+        0 0 8px #b238ff,
+        0 0 20px #8e20ff;
+
+    animation:particleMove linear infinite;
+
+}
+
+@keyframes particleMove{
+
+    from{
+        transform:translateY(110vh);
     }
 
-    .background-glow {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: #7b00ff;
-      filter: blur(180px);
-      opacity: 0.15;
-      top: -200px;
-      left: -200px;
-      z-index: -5;
-      pointer-events: none;
+    to{
+        transform:translateY(-20vh);
     }
 
-    .background-glow.two {
-      background: #b000ff;
-      top: auto;
-      left: auto;
-      right: -250px;
-      bottom: -250px;
-    }
+}
 
-    /* =========================================================
-       PARTICLES
-    ========================================================= */
 
-    #particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
+/* =====================================================
+   CINEMATIC INTRO
+===================================================== */
 
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: #b56cff;
-      box-shadow: 0 0 15px #9b3dff;
-      animation: floatParticle linear infinite;
-      opacity: 0.7;
-    }
+#intro{
 
-    @keyframes floatParticle {
-      from {
-        transform: translateY(110vh);
-      }
+    position:fixed;
 
-      to {
-        transform: translateY(-20vh);
-      }
-    }
+    inset:0;
 
-    /* =========================================================
-       INTRO
-    ========================================================= */
+    z-index:10000;
 
-    #intro {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at center, #1b0030 0%, #07000d 45%, #020003 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 10000;
-      transition:
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #210044 0%,
+            #090014 38%,
+            #010002 100%
+        );
+
+    transition:
         opacity 1.2s ease,
         visibility 1.2s ease;
+
+}
+
+#intro.hide{
+
+    opacity:0;
+    visibility:hidden;
+
+}
+
+.intro-line{
+
+    width:0;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #b84cff,
+            #00eaff,
+            transparent
+        );
+
+    animation:introLine 2s ease forwards;
+
+}
+
+@keyframes introLine{
+
+    to{
+        width:280px;
     }
 
-    #intro.hide {
-      opacity: 0;
-      visibility: hidden;
+}
+
+.intro-mini{
+
+    margin:25px 0;
+
+    color:#c78aff;
+
+    letter-spacing:7px;
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    opacity:0;
+
+    animation:fadeIn 1.5s ease .5s forwards;
+
+}
+
+.signature{
+
+    font-family:"Pacifico",cursive;
+
+    color:#ffd66b;
+
+    font-size:clamp(55px,10vw,125px);
+
+    transform:rotate(-4deg);
+
+    text-align:center;
+
+    text-shadow:
+
+        0 0 5px #ffd66b,
+
+        0 0 20px #ffbd35,
+
+        0 0 45px rgba(255,170,0,.7),
+
+        0 10px 30px #000;
+
+    opacity:0;
+
+    animation:
+        signatureIn 2s ease .8s forwards,
+        goldPulse 3s ease-in-out 3s infinite;
+
+}
+
+@keyframes signatureIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.65)
+            rotate(-10deg);
+
+        filter:blur(15px);
+
     }
 
-    .intro-small {
-      font-size: 11px;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      color: #c78cff;
-      margin-bottom: 25px;
-      animation: fadeUp 1.5s ease forwards;
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            rotate(-4deg);
+
+        filter:blur(0);
+
     }
 
-    .signature {
-      font-family: "Pacifico", cursive;
-      font-size: clamp(55px, 10vw, 130px);
-      color: #ffd76a;
-      text-align: center;
+}
 
-      text-shadow:
-        0 0 5px #ffd76a,
-        0 0 15px #ffbd32,
-        0 0 35px rgba(255, 175, 0, 0.7),
-        0 8px 20px rgba(0,0,0,0.8);
+@keyframes goldPulse{
 
-      transform: rotate(-3deg);
-      animation:
-        signatureReveal 2.5s ease forwards,
-        signatureGlow 3s ease-in-out infinite 2.5s;
+    0%,100%{
+
+        filter:brightness(1);
+
     }
 
-    @keyframes signatureReveal {
-      from {
-        opacity: 0;
-        transform: scale(0.8) rotate(-8deg);
-        filter: blur(12px);
-      }
+    50%{
 
-      to {
-        opacity: 1;
-        transform: scale(1) rotate(-3deg);
-        filter: blur(0);
-      }
+        filter:brightness(1.4);
+
     }
 
-    @keyframes signatureGlow {
-      0%,100% {
-        text-shadow:
-          0 0 5px #ffd76a,
-          0 0 15px #ffbd32,
-          0 0 35px rgba(255, 175, 0, 0.7);
-      }
+}
 
-      50% {
-        text-shadow:
-          0 0 8px #fff2a5,
-          0 0 30px #ffc13b,
-          0 0 60px rgba(255, 175, 0, 0.9);
-      }
+.intro-role{
+
+    color:#aaa;
+
+    letter-spacing:5px;
+
+    font-size:10px;
+
+    margin-top:30px;
+
+    opacity:0;
+
+    animation:fadeIn 1s ease 1.8s forwards;
+
+}
+
+.enter{
+
+    margin-top:45px;
+
+    padding:16px 35px;
+
+    border-radius:100px;
+
+    border:1px solid rgba(188,70,255,.5);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(145,0,255,.15),
+            rgba(0,218,255,.08)
+        );
+
+    color:white;
+
+    letter-spacing:3px;
+
+    font-size:10px;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    animation:fadeIn 1s ease 2.2s forwards;
+
+    transition:.4s;
+
+}
+
+.enter:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 0 25px #a42cff,
+        0 0 70px rgba(0,221,255,.2);
+
+}
+
+@keyframes fadeIn{
+
+    to{
+        opacity:1;
     }
 
-    .intro-subtitle {
-      margin-top: 35px;
-      color: #aaa;
-      font-size: 12px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 1.5s ease 1s forwards;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    padding:22px 6%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    z-index:1000;
+
+    background:
+        rgba(3,0,7,.35);
+
+    backdrop-filter:blur(20px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+
+}
+
+.logo{
+
+    font-family:"Orbitron",sans-serif;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+}
+
+.logo span{
+
+    color:#9f37ff;
+
+    text-shadow:
+        0 0 20px #a633ff;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+.nav-links a{
+
+    color:#888;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#fff;
+
+    text-shadow:
+        0 0 15px #a832ff;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:130px 7% 80px;
+
+}
+
+#three-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:0;
+
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+
+    max-width:1200px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        .7fr;
+
+    gap:60px;
+
+    align-items:center;
+
+}
+
+.hero-left{
+
+    position:relative;
+
+}
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:9px 16px;
+
+    border-radius:100px;
+
+    border:
+        1px solid rgba(179,72,255,.3);
+
+    background:
+        rgba(120,0,255,.08);
+
+    color:#c184ff;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+}
+
+.status-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#00ffb7;
+
+    box-shadow:
+        0 0 15px #00ffb7;
+
+}
+
+.hero h1{
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:
+        clamp(48px,8vw,100px);
+
+    line-height:.95;
+
+    letter-spacing:-5px;
+
+    margin-top:30px;
+
+}
+
+.hero h1 .outline{
+
+    color:transparent;
+
+    -webkit-text-stroke:
+        1px #a943ff;
+
+    text-shadow:
+        0 0 35px rgba(161,53,255,.2);
+
+}
+
+.hero-description{
+
+    max-width:650px;
+
+    color:#8d8d8d;
+
+    line-height:1.9;
+
+    margin-top:30px;
+
+    font-size:14px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-top:35px;
+
+}
+
+.btn{
+
+    padding:15px 25px;
+
+    border-radius:100px;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    transition:.4s;
+
+}
+
+.primary{
+
+    background:
+        linear-gradient(
+            100deg,
+            #8c19ff,
+            #d300ff,
+            #00cfff
+        );
+
+    box-shadow:
+        0 0 30px rgba(157,30,255,.35);
+
+}
+
+.primary:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 30px #a629ff,
+        0 0 80px rgba(0,207,255,.25);
+
+}
+
+.secondary{
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    background:
+        rgba(255,255,255,.04);
+
+}
+
+.secondary:hover{
+
+    border-color:#b54cff;
+
+    transform:translateY(-5px);
+
+}
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.profile-wrap{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+}
+
+.profile-ring{
+
+    width:min(380px,75vw);
+
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    padding:5px;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            #8e24ff,
+            #00eaff,
+            #ff00c8,
+            #ffd45c,
+            #8e24ff
+        );
+
+    animation:rotateRing 8s linear infinite;
+
+    box-shadow:
+        0 0 30px rgba(143,34,255,.5),
+        0 0 100px rgba(0,217,255,.15);
+
+}
+
+@keyframes rotateRing{
+
+    to{
+        transform:rotate(360deg);
     }
 
-    .enter-btn {
-      margin-top: 45px;
-      border: 1px solid rgba(196, 103, 255, 0.6);
-      background: rgba(119, 0, 255, 0.12);
-      color: white;
-      padding: 15px 35px;
-      border-radius: 100px;
-      letter-spacing: 3px;
-      font-size: 11px;
-      cursor: pointer;
-      transition: 0.4s;
-      backdrop-filter: blur(15px);
-      opacity: 0;
-      animation: fadeUp 1.5s ease 1.5s forwards;
-      box-shadow: 0 0 30px rgba(130, 0, 255, 0.15);
+}
+
+.profile-inner{
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    padding:8px;
+
+    background:#08000e;
+
+    animation:counterRotate 8s linear infinite;
+
+}
+
+@keyframes counterRotate{
+
+    to{
+        transform:rotate(-360deg);
     }
 
-    .enter-btn:hover {
-      background: rgba(154, 45, 255, 0.35);
-      box-shadow:
-        0 0 20px #8e22ff,
-        0 0 60px rgba(142,34,255,0.3);
-      transform: scale(1.05);
-    }
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+.profile-inner img{
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    width:100%;
+    height:100%;
 
-    /* =========================================================
-       NAVBAR
-    ========================================================= */
+    object-fit:cover;
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 25px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 1000;
+    border-radius:50%;
 
-      background: rgba(4,0,8,0.25);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
+    display:block;
 
-    .nav-logo {
-      font-family: "Orbitron", sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #fff;
-    }
+    filter:
+        contrast(1.08)
+        saturate(1.08);
 
-    .nav-logo span {
-      color: #a644ff;
-    }
+}
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-    }
+.profile-glow{
 
-    .nav-links a {
-      color: #aaa;
-      font-size: 12px;
-      letter-spacing: 1px;
-      transition: 0.3s;
-    }
+    position:absolute;
 
-    .nav-links a:hover {
-      color: #d28aff;
-      text-shadow: 0 0 15px #9c35ff;
-    }
+    width:100%;
 
-    /* =========================================================
-       HERO
-    ========================================================= */
+    aspect-ratio:1;
 
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 7% 80px;
-      overflow: hidden;
-    }
+    max-width:420px;
 
-    .hero-content {
-      max-width: 900px;
-      text-align: center;
-      position: relative;
-      z-index: 5;
-    }
+    border-radius:50%;
 
-    .hero-tag {
-      display: inline-block;
-      padding: 8px 17px;
-      border: 1px solid rgba(178,75,255,0.3);
-      background: rgba(129,0,255,0.08);
-      border-radius: 100px;
-      color: #c886ff;
-      font-size: 10px;
-      letter-spacing: 3px;
-      margin-bottom: 30px;
-    }
-
-    .hero h1 {
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(45px, 8vw, 100px);
-      line-height: 1;
-      letter-spacing: -4px;
-    }
-
-    .hero h1 span {
-      color: transparent;
-      -webkit-text-stroke: 1px #bd65ff;
-      text-shadow: 0 0 35px rgba(153, 39, 255, 0.25);
-    }
-
-    .hero-description {
-      max-width: 650px;
-      margin: 30px auto;
-      color: #999;
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 35px;
-    }
-
-    .btn {
-      padding: 14px 25px;
-      border-radius: 100px;
-      font-size: 11px;
-      letter-spacing: 2px;
-      transition: 0.4s;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #8f22ff, #5312a4);
-      box-shadow: 0 0 30px rgba(130,35,255,0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 0 30px rgba(156,48,255,0.6),
-        0 0 70px rgba(156,48,255,0.2);
-    }
-
-    .btn-outline {
-      border: 1px solid #572071;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .btn-outline:hover {
-      border-color: #a647ff;
-      background: rgba(137,29,255,0.1);
-      transform: translateY(-4px);
-    }
-
-    /* =========================================================
-       WATER BUBBLES
-    ========================================================= */
-
-    .bubble {
-      position: absolute;
-      border-radius: 50%;
-      background:
+    background:
         radial-gradient(
-          circle at 30% 25%,
-          rgba(255,255,255,0.35),
-          rgba(168,63,255,0.08) 35%,
-          rgba(107,0,255,0.02) 70%
+            circle,
+            rgba(143,31,255,.2),
+            transparent 65%
         );
 
-      border: 1px solid rgba(196,115,255,0.18);
-      box-shadow:
-        inset 0 0 30px rgba(164,54,255,0.12),
-        0 0 35px rgba(129,0,255,0.1);
+    filter:blur(35px);
 
-      backdrop-filter: blur(3px);
-      animation: bubbleMove 8s ease-in-out infinite;
+    z-index:-1;
+
+}
+
+
+/* =====================================================
+   FLOATING LABELS
+===================================================== */
+
+.float-label{
+
+    position:absolute;
+
+    padding:13px 18px;
+
+    border-radius:15px;
+
+    background:
+        rgba(8,2,16,.7);
+
+    backdrop-filter:blur(15px);
+
+    border:
+        1px solid rgba(185,76,255,.2);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.4);
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    animation:labelFloat 5s ease-in-out infinite;
+
+}
+
+.label1{
+
+    top:12%;
+
+    right:0;
+
+    color:#00eaff;
+
+}
+
+.label2{
+
+    bottom:15%;
+
+    left:0;
+
+    color:#ff6de8;
+
+    animation-delay:-2s;
+
+}
+
+@keyframes labelFloat{
+
+    0%,100%{
+        transform:translateY(0);
     }
 
-    .bubble.b1 {
-      width: 170px;
-      height: 170px;
-      top: 15%;
-      left: 7%;
+    50%{
+        transform:translateY(-15px);
     }
 
-    .bubble.b2 {
-      width: 80px;
-      height: 80px;
-      right: 14%;
-      top: 22%;
-      animation-delay: -2s;
-    }
+}
 
-    .bubble.b3 {
-      width: 120px;
-      height: 120px;
-      bottom: 12%;
-      left: 17%;
-      animation-delay: -5s;
-    }
 
-    .bubble.b4 {
-      width: 220px;
-      height: 220px;
-      right: -60px;
-      bottom: 8%;
-      animation-delay: -3s;
-    }
+/* =====================================================
+   SECTIONS
+===================================================== */
 
-    @keyframes bubbleMove {
-      0%,100% {
-        transform: translate3d(0,0,0);
-      }
+section{
 
-      50% {
-        transform: translate3d(20px,-30px,0);
-      }
-    }
+    position:relative;
 
-    /* =========================================================
-       SECTIONS
-    ========================================================= */
+    padding:
+        130px 7%;
 
-    section {
-      padding: 120px 7%;
-      position: relative;
-    }
+}
 
-    .section-label {
-      color: #a74cff;
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-    }
+.section-label{
 
-    .section-title {
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(30px,5vw,60px);
-      margin-bottom: 50px;
-    }
+    color:#b34cff;
 
-    .section-title span {
-      color: #8e2cff;
-    }
+    letter-spacing:4px;
 
-    /* =========================================================
-       ABOUT
-    ========================================================= */
+    font-size:9px;
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
+    margin-bottom:18px;
 
-    .about-text {
-      color: #999;
-      line-height: 2;
-      font-size: 15px;
-    }
+}
 
-    .about-text strong {
-      color: white;
-    }
+.section-title{
 
-    .about-card {
-      padding: 40px;
-      border: 1px solid rgba(167,72,255,0.18);
-      border-radius: 25px;
-      background:
+    font-family:"Orbitron",sans-serif;
+
+    font-size:
+        clamp(30px,5vw,65px);
+
+    margin-bottom:50px;
+
+}
+
+.gradient-text{
+
+    color:transparent;
+
+    background:
         linear-gradient(
-          145deg,
-          rgba(141,0,255,0.12),
-          rgba(255,255,255,0.02)
+            90deg,
+            #a932ff,
+            #00eaff,
+            #ff37d7
         );
 
-      box-shadow:
-        inset 0 0 50px rgba(129,0,255,0.05),
-        0 20px 70px rgba(0,0,0,0.4);
+    -webkit-background-clip:text;
 
-      transition: 0.5s;
-    }
+}
 
-    .about-card:hover {
-      transform: perspective(900px) rotateX(4deg) rotateY(-4deg);
-      border-color: rgba(180,85,255,0.5);
-    }
 
-    .about-card h3 {
-      font-family: "Orbitron", sans-serif;
-      margin-bottom: 20px;
-    }
+/* =====================================================
+   ABOUT
+===================================================== */
 
-    .about-card p {
-      color: #888;
-      line-height: 1.8;
-    }
+.about-grid{
 
-    /* =========================================================
-       SKILLS
-    ========================================================= */
+    max-width:1200px;
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 25px;
-    }
+    margin:auto;
 
-    .skill-card {
-      min-height: 250px;
-      padding: 35px;
-      border-radius: 25px;
-      position: relative;
-      overflow: hidden;
+    display:grid;
 
-      background:
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:30px;
+
+}
+
+.glass{
+
+    padding:45px;
+
+    border-radius:30px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
         linear-gradient(
-          145deg,
-          rgba(130,0,255,0.15),
-          rgba(255,255,255,0.025)
+            135deg,
+            rgba(151,45,255,.13),
+            rgba(0,220,255,.035),
+            rgba(255,255,255,.02)
         );
 
-      border: 1px solid rgba(180,90,255,0.15);
+    backdrop-filter:blur(25px);
 
-      transition: 0.5s;
-      transform-style: preserve-3d;
-    }
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.3);
 
-    .skill-card::before {
-      content: "";
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: #8e22ff;
-      filter: blur(80px);
-      opacity: 0.15;
-      right: -50px;
-      top: -50px;
-    }
+    transition:.5s;
 
-    .skill-card:hover {
-      transform:
+}
+
+.glass:hover{
+
+    transform:
+        translateY(-8px)
+        perspective(1000px)
+        rotateX(2deg);
+
+    border-color:
+        rgba(184,76,255,.35);
+
+}
+
+.about-text{
+
+    color:#929292;
+
+    line-height:2;
+
+    font-size:14px;
+
+}
+
+.about-text strong{
+
+    color:#fff;
+
+}
+
+.info-list{
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+.info-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding-bottom:15px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+}
+
+.info-item span:first-child{
+
+    color:#666;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+}
+
+.info-item span:last-child{
+
+    color:#d69bff;
+
+    font-size:12px;
+
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skills{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+.skill{
+
+    min-height:290px;
+
+    padding:35px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(137,0,255,.14),
+            rgba(0,214,255,.035)
+        );
+
+    transition:.5s;
+
+    transform-style:preserve-3d;
+
+}
+
+.skill:hover{
+
+    transform:
         perspective(800px)
         rotateX(6deg)
         rotateY(-6deg)
-        translateY(-10px);
+        translateY(-12px);
 
-      border-color: rgba(190,100,255,0.5);
-      box-shadow:
-        0 25px 80px rgba(93,0,180,0.2);
-    }
+    box-shadow:
+        0 30px 80px rgba(100,0,200,.25);
 
-    .skill-icon {
-      font-size: 45px;
-      margin-bottom: 25px;
-      filter: drop-shadow(0 0 15px rgba(177,65,255,0.6));
-    }
+}
 
-    .skill-card h3 {
-      font-family: "Orbitron", sans-serif;
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
+.skill-number{
 
-    .skill-card p {
-      color: #888;
-      font-size: 13px;
-      line-height: 1.7;
-    }
+    position:absolute;
 
-    .level {
-      margin-top: 25px;
-      font-size: 10px;
-      color: #b96cff;
-      letter-spacing: 2px;
-    }
+    right:25px;
+    top:20px;
 
-    /* =========================================================
-       YOUTUBE
-    ========================================================= */
+    font-family:"Orbitron";
 
-    .youtube-card {
-      position: relative;
-      overflow: hidden;
-      padding: 55px;
-      border-radius: 30px;
+    font-size:12px;
 
-      background:
+    color:#4e315f;
+
+}
+
+.skill-icon{
+
+    font-size:50px;
+
+    margin-bottom:30px;
+
+    filter:
+        drop-shadow(0 0 20px #a12cff);
+
+}
+
+.skill h3{
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:17px;
+
+}
+
+.skill p{
+
+    color:#777;
+
+    font-size:12px;
+
+    line-height:1.8;
+
+    margin-top:15px;
+
+}
+
+.skill-level{
+
+    margin-top:25px;
+
+    color:#b85dff;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+}
+
+
+/* =====================================================
+   YOUTUBE
+===================================================== */
+
+.youtube-box{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:60px;
+
+    border-radius:35px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
         radial-gradient(
-          circle at 80% 20%,
-          rgba(135,0,255,0.25),
-          transparent 40%
+            circle at 80% 20%,
+            rgba(255,0,110,.18),
+            transparent 30%
         ),
-        rgba(255,255,255,0.025);
+        linear-gradient(
+            120deg,
+            rgba(120,0,255,.15),
+            rgba(0,220,255,.04)
+        );
 
-      border: 1px solid rgba(186,89,255,0.2);
+}
+
+.youtube-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    background:#ff005d;
+
+    filter:blur(150px);
+
+    opacity:.15;
+
+    right:-150px;
+    top:-150px;
+
+}
+
+.youtube-box h2{
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:
+        clamp(35px,6vw,70px);
+
+}
+
+.youtube-box p{
+
+    max-width:650px;
+
+    color:#888;
+
+    line-height:1.9;
+
+    margin:25px 0 35px;
+
+}
+
+.social-row{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.social{
+
+    padding:14px 22px;
+
+    border-radius:100px;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+.social:hover{
+
+    border-color:#a83dff;
+
+    box-shadow:
+        0 0 25px rgba(168,61,255,.25);
+
+    transform:translateY(-4px);
+
+}
+
+
+/* =====================================================
+   CREATOR SPACE
+===================================================== */
+
+.creator-space{
+
+    min-height:500px;
+
+    border-radius:35px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(128,0,255,.16),
+            #040007 65%
+        );
+
+    border:
+        1px solid rgba(169,65,255,.15);
+
+}
+
+.space-grid{
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(140,40,255,.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(140,40,255,.08) 1px,
+            transparent 1px
+        );
+
+    background-size:50px 50px;
+
+    transform:
+        perspective(500px)
+        rotateX(60deg)
+        scale(2);
+
+    transform-origin:center bottom;
+
+}
+
+.space-content{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    z-index:3;
+
+}
+
+.space-content h2{
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:
+        clamp(30px,6vw,70px);
+
+}
+
+.space-content p{
+
+    color:#777;
+
+    margin-top:20px;
+
+}
+
+.neon-ring{
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(0,220,255,.4);
+
+    box-shadow:
+        0 0 30px rgba(0,220,255,.2),
+        inset 0 0 30px rgba(157,36,255,.15);
+
+    animation:ringSpin 10s linear infinite;
+
+}
+
+@keyframes ringSpin{
+
+    to{
+        transform:rotate(360deg);
     }
 
-    .youtube-card h3 {
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(25px,5vw,55px);
-      margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    padding:
+        100px 7%
+        50px;
+
+    text-align:center;
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+}
+
+footer .signature{
+
+    font-size:
+        clamp(45px,8vw,85px);
+
+}
+
+footer p{
+
+    color:#555;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    margin-top:25px;
+
+}
+
+
+/* =====================================================
+   REVEAL
+===================================================== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(50px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+
+}
+
+.reveal.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
     }
 
-    .youtube-card p {
-      max-width: 600px;
-      color: #888;
-      line-height: 1.8;
-      margin-bottom: 30px;
+    .hero-content{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
     }
 
-    /* =========================================================
-       FUTURE / SPACE
-    ========================================================= */
+    .hero-description{
 
-    .space-container {
-      min-height: 450px;
-      position: relative;
-      border-radius: 30px;
-      overflow: hidden;
-      border: 1px solid rgba(165,67,255,0.15);
-      background: #07000e;
+        margin-left:auto;
+        margin-right:auto;
+
     }
 
-    .space-text {
-      position: absolute;
-      z-index: 5;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      text-align: center;
-      width: 90%;
+    .hero-buttons{
+
+        justify-content:center;
+
     }
 
-    .space-text h2 {
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(30px,5vw,65px);
+    .profile-wrap{
+
+        order:-1;
+
     }
 
-    .space-text p {
-      color: #888;
-      margin-top: 20px;
+    .profile-ring{
+
+        width:270px;
+
     }
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(
-        circle at 30% 30%,
-        #e3b6ff,
-        #8a16ff 35%,
-        #18002d 70%
-      );
+    .float-label{
 
-      box-shadow:
-        0 0 40px rgba(141,35,255,0.5),
-        inset -20px -20px 50px rgba(0,0,0,0.5);
+        display:none;
 
-      animation: orbitFloat 7s ease-in-out infinite;
     }
 
-    .orb.one {
-      width: 100px;
-      height: 100px;
-      top: 15%;
-      left: 15%;
+    .about-grid{
+
+        grid-template-columns:1fr;
+
     }
 
-    .orb.two {
-      width: 55px;
-      height: 55px;
-      right: 20%;
-      top: 20%;
-      animation-delay: -2s;
+    .skills{
+
+        grid-template-columns:1fr;
+
     }
 
-    .orb.three {
-      width: 140px;
-      height: 140px;
-      bottom: -20px;
-      right: 5%;
-      animation-delay: -4s;
+    .youtube-box{
+
+        padding:35px 25px;
+
     }
 
-    @keyframes orbitFloat {
-      0%,100% {
-        transform: translateY(0) rotate(0);
-      }
+    section{
 
-      50% {
-        transform: translateY(-35px) rotate(180deg);
-      }
+        padding:
+            90px 6%;
+
     }
 
-    /* =========================================================
-       FOOTER
-    ========================================================= */
+    .cursor-light{
 
-    footer {
-      padding: 80px 7% 40px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
+        display:none;
+
     }
 
-    footer .signature {
-      font-size: clamp(45px,8vw,80px);
-    }
+}
 
-    footer p {
-      color: #666;
-      margin-top: 25px;
-      font-size: 12px;
-    }
+</style>
 
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-
-    .social {
-      padding: 12px 20px;
-      border: 1px solid rgba(165,72,255,0.2);
-      border-radius: 100px;
-      font-size: 11px;
-      color: #aaa;
-      transition: 0.3s;
-    }
-
-    .social:hover {
-      color: white;
-      border-color: #a33eff;
-      box-shadow: 0 0 25px rgba(163,62,255,0.25);
-    }
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
-
-    @media (max-width: 800px) {
-
-      .nav-links {
-        display: none;
-      }
-
-      nav {
-        padding: 20px 6%;
-      }
-
-      .hero {
-        padding-left: 6%;
-        padding-right: 6%;
-      }
-
-      .hero h1 {
-        letter-spacing: -2px;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 90px 6%;
-      }
-
-      .youtube-card {
-        padding: 35px 25px;
-      }
-
-      .bubble.b1 {
-        width: 100px;
-        height: 100px;
-      }
-
-      .bubble.b4 {
-        width: 130px;
-        height: 130px;
-      }
-
-      .signature {
-        font-size: 55px;
-      }
-    }
-
-  </style>
 </head>
+
 
 <body class="locked">
 
-  <!-- =======================================================
-       CINEMATIC INTRO
-  ======================================================== -->
 
-  <div id="intro">
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-    <div class="intro-small">
-      Welcome to my world
+<div id="intro">
+
+    <div class="intro-line"></div>
+
+    <div class="intro-mini">
+        WELCOME TO MY DIGITAL WORLD
     </div>
 
     <div class="signature">
-      Yonas Nickee
+        Yonas Nickee
     </div>
 
-    <div class="intro-subtitle">
-      Editor • Music Producer • Creator
+    <div class="intro-role">
+        EDITOR • MUSIC PRODUCER • CREATOR
     </div>
 
-    <button class="enter-btn" id="enterBtn">
-      ENTER EXPERIENCE
+    <button class="enter" id="enter">
+        ENTER EXPERIENCE
     </button>
 
-  </div>
+</div>
 
 
-  <!-- Background -->
-  <div class="background-glow"></div>
-  <div class="background-glow two"></div>
+<!-- =====================================================
+     GLOBAL EFFECTS
+===================================================== -->
 
-  <div id="particles"></div>
+<div class="cursor-light"></div>
+
+<div class="bg-orb one"></div>
+<div class="bg-orb two"></div>
+<div class="bg-orb three"></div>
+
+<div id="particles"></div>
 
 
-  <!-- =======================================================
-       NAVBAR
-  ======================================================== -->
+<!-- =====================================================
+     NAV
+===================================================== -->
 
-  <nav>
+<nav>
 
-    <div class="nav-logo">
-      YONAS<span>.</span>
+    <div class="logo">
+        YONAS<span>.</span>
     </div>
 
     <div class="nav-links">
-      <a href="#home">HOME</a>
-      <a href="#about">ABOUT</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#youtube">YOUTUBE</a>
-      <a href="#contact">CONTACT</a>
+
+        <a href="#home">HOME</a>
+
+        <a href="#about">ABOUT</a>
+
+        <a href="#skills">SKILLS</a>
+
+        <a href="#youtube">YOUTUBE</a>
+
+        <a href="#contact">CONTACT</a>
+
     </div>
 
-  </nav>
+</nav>
 
 
-  <!-- =======================================================
-       HERO
-  ======================================================== -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-  <main id="home">
+<section class="hero" id="home">
 
-    <section class="hero">
+    <div id="three-bg"></div>
 
-      <div class="bubble b1"></div>
-      <div class="bubble b2"></div>
-      <div class="bubble b3"></div>
-      <div class="bubble b4"></div>
-
-      <div class="hero-content">
-
-        <div class="hero-tag">
-          PERSONAL DIGITAL SPACE
-        </div>
-
-        <h1>
-          YONAS <span>NICKEE</span>
-        </h1>
-
-        <p class="hero-description">
-          Intermediate Editor • Intermediate Music Producer
-          <br>
-          Creating visuals, sounds and ideas while learning
-          something new every day.
-        </p>
-
-        <div class="hero-buttons">
-
-          <a href="#about" class="btn btn-primary">
-            EXPLORE ME
-          </a>
-
-          <a
-            href="https://youtube.com/@yonaseditz?si=QeAMsgB-EfUsKKXF"
-            target="_blank"
-            class="btn btn-outline"
-          >
-            YOUTUBE ↗
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
+    <div class="hero-content">
 
 
-    <!-- =====================================================
-         ABOUT
-    ====================================================== -->
+        <div class="hero-left reveal">
 
-    <section id="about">
+            <div class="status">
 
-      <div class="section-label">
-        01 — ABOUT
-      </div>
+                <span class="status-dot"></span>
 
-      <h2 class="section-title">
-        WHO IS <span>YONAS?</span>
-      </h2>
+                ONLINE • CREATING
 
-      <div class="about-grid">
+            </div>
 
-        <div class="about-text">
 
-          <p>
-            I'm <strong>Yonas Nickee</strong>, an intermediate editor
-            and music producer who enjoys experimenting with creative
-            digital content.
-          </p>
+            <h1>
 
-          <br>
+                YONAS
 
-          <p>
-            I'm still learning, exploring and improving my skills.
-            This website is my little digital space where I can share
-            what I create and what I'm interested in.
-          </p>
+                <br>
+
+                <span class="outline">
+                    NICKEE
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Intermediate Editor.
+                Intermediate Music Producer.
+
+                <br>
+
+                Exploring visuals, sounds,
+                creativity and everything
+                that makes digital content feel alive.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#about"
+                    class="btn primary"
+                >
+                    EXPLORE MY WORLD
+                </a>
+
+
+                <a
+                    href="https://www.instagram.com/yonas26_07/"
+                    target="_blank"
+                    class="btn secondary"
+                >
+                    INSTAGRAM ↗
+                </a>
+
+            </div>
 
         </div>
 
 
-        <div class="about-card">
+        <!-- PROFILE -->
 
-          <h3>MY DIGITAL IDENTITY</h3>
+        <div class="profile-wrap reveal">
 
-          <p>
-            Video Editing
-            <br>
-            Music Production
-            <br>
-            Content Creation
-            <br>
-            Creative Experiments
-          </p>
+            <div class="profile-glow"></div>
 
-        </div>
+            <div class="profile-ring">
 
-      </div>
+                <div class="profile-inner">
 
-    </section>
+                    <img
+                        src="assets/profile.jpg"
+                        alt="Yonas Nickee"
+                    >
 
+                </div>
 
-    <!-- =====================================================
-         SKILLS
-    ====================================================== -->
-
-    <section id="skills">
-
-      <div class="section-label">
-        02 — SKILLS
-      </div>
-
-      <h2 class="section-title">
-        WHAT I <span>CREATE</span>
-      </h2>
-
-      <div class="skills-grid">
+            </div>
 
 
-        <div class="skill-card">
+            <div class="float-label label1">
+                VIDEO EDITOR
+            </div>
 
-          <div class="skill-icon">
-            🎬
-          </div>
-
-          <h3>VIDEO EDITING</h3>
-
-          <p>
-            Creating edits, visual compositions,
-            transitions and creative video content.
-          </p>
-
-          <div class="level">
-            INTERMEDIATE
-          </div>
+            <div class="float-label label2">
+                MUSIC PRODUCER
+            </div>
 
         </div>
 
+    </div>
 
-        <div class="skill-card">
+</section>
 
-          <div class="skill-icon">
-            🎵
-          </div>
 
-          <h3>MUSIC PRODUCTION</h3>
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
-          <p>
-            Exploring music creation, sounds,
-            arrangements and digital production.
-          </p>
+<section id="about">
 
-          <div class="level">
-            INTERMEDIATE
-          </div>
+    <div class="section-label reveal">
+        01 — IDENTITY
+    </div>
+
+    <h2 class="section-title reveal">
+
+        THIS IS
+
+        <span class="gradient-text">
+            ME.
+        </span>
+
+    </h2>
+
+
+    <div class="about-grid">
+
+
+        <div class="glass reveal">
+
+            <div class="about-text">
+
+                I'm
+
+                <strong>
+                    Yonas Nickee
+                </strong>
+
+                — an intermediate editor
+                and music producer.
+
+                <br><br>
+
+                I'm not here to pretend
+                I have everything figured out.
+
+                I'm learning,
+                experimenting,
+                creating and improving
+                one project at a time.
+
+                <br><br>
+
+                This website is my personal
+                digital space — a place where
+                my editing, music and creativity
+                come together.
+
+            </div>
 
         </div>
 
 
-        <div class="skill-card">
+        <div class="glass reveal">
 
-          <div class="skill-icon">
-            ⚡
-          </div>
+            <div class="info-list">
 
-          <h3>CONTENT CREATION</h3>
+                <div class="info-item">
 
-          <p>
-            Creating and experimenting with
-            digital content for online platforms.
-          </p>
+                    <span>
+                        NAME
+                    </span>
 
-          <div class="level">
-            CREATIVE MODE
-          </div>
+                    <span>
+                        Yonas Nickee
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        ROLE
+                    </span>
+
+                    <span>
+                        Intermediate Editor
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        MUSIC
+                    </span>
+
+                    <span>
+                        Music Producer
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        YOUTUBE
+                    </span>
+
+                    <span>
+                        Yonas Editz
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        INSTAGRAM
+                    </span>
+
+                    <span>
+                        @yonas26_07
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
 
-      </div>
+    </div>
 
-    </section>
-
-
-    <!-- =====================================================
-         YOUTUBE
-    ====================================================== -->
-
-    <section id="youtube">
-
-      <div class="section-label">
-        03 — CHANNEL
-      </div>
-
-      <h2 class="section-title">
-        MY <span>YOUTUBE</span>
-      </h2>
+</section>
 
 
-      <div class="youtube-card">
+<!-- =====================================================
+     SKILLS
+===================================================== -->
 
-        <h3>YONAS EDITZ</h3>
+<section id="skills">
+
+    <div class="section-label reveal">
+        02 — CREATIVE SKILLS
+    </div>
+
+    <h2 class="section-title reveal">
+
+        WHAT I
+
+        <span class="gradient-text">
+            DO.
+        </span>
+
+    </h2>
+
+
+    <div class="skills">
+
+
+        <div class="skill reveal">
+
+            <div class="skill-number">
+                01
+            </div>
+
+            <div class="skill-icon">
+                🎬
+            </div>
+
+            <h3>
+                VIDEO EDITING
+            </h3>
+
+            <p>
+                Creative video editing,
+                transitions, visual effects,
+                timing and storytelling.
+            </p>
+
+            <div class="skill-level">
+                INTERMEDIATE
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-number">
+                02
+            </div>
+
+            <div class="skill-icon">
+                🎧
+            </div>
+
+            <h3>
+                MUSIC PRODUCTION
+            </h3>
+
+            <p>
+                Exploring sounds,
+                music creation,
+                arrangements and
+                digital production.
+            </p>
+
+            <div class="skill-level">
+                INTERMEDIATE
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-number">
+                03
+            </div>
+
+            <div class="skill-icon">
+                ⚡
+            </div>
+
+            <h3>
+                CONTENT CREATION
+            </h3>
+
+            <p>
+                Creating digital content,
+                experimenting with ideas
+                and sharing them online.
+            </p>
+
+            <div class="skill-level">
+                CREATIVE MODE
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     YOUTUBE
+===================================================== -->
+
+<section id="youtube">
+
+    <div class="section-label reveal">
+        03 — DIGITAL CHANNEL
+    </div>
+
+    <h2 class="section-title reveal">
+
+        YONAS
+
+        <span class="gradient-text">
+            EDITZ.
+        </span>
+
+    </h2>
+
+
+    <div class="youtube-box reveal">
+
+        <h2>
+            CREATE.<br>
+            EDIT.<br>
+            UPLOAD.
+        </h2>
+
 
         <p>
-          My YouTube channel is mainly focused on editing
-          content and some news-related uploads.
-          This is where I share my work and experiments.
+
+            My YouTube channel is focused mainly
+            on editing content and some news uploads.
+
+            It's one of the places where I share
+            what I create and experiment with.
+
         </p>
 
-        <a
-          class="btn btn-primary"
-          href="https://youtube.com/@yonaseditz?si=QeAMsgB-EfUsKKXF"
-          target="_blank"
-        >
-          VISIT CHANNEL ↗
-        </a>
 
-      </div>
+        <div class="social-row">
 
-    </section>
-
-
-    <!-- =====================================================
-         MY SPACE
-    ====================================================== -->
-
-    <section>
-
-      <div class="section-label">
-        04 — MY SPACE
-      </div>
-
-      <h2 class="section-title">
-        STILL <span>CREATING.</span>
-      </h2>
+            <a
+                class="social"
+                href="https://youtube.com/@yonaseditz?si=ti9ct3EUcSuZ20Ol"
+                target="_blank"
+            >
+                ▶ YOUTUBE
+            </a>
 
 
-      <div class="space-container">
-
-        <div class="orb one"></div>
-        <div class="orb two"></div>
-        <div class="orb three"></div>
-
-        <div class="space-text">
-
-          <h2>
-            CREATE.<br>
-            LEARN.<br>
-            REPEAT.
-          </h2>
-
-          <p>
-            No big achievements yet.
-            Just curiosity, creativity and ideas.
-          </p>
+            <a
+                class="social"
+                href="https://www.instagram.com/yonas26_07/"
+                target="_blank"
+            >
+                ◎ INSTAGRAM
+            </a>
 
         </div>
 
-      </div>
+    </div>
 
-    </section>
-
-  </main>
+</section>
 
 
-  <!-- =======================================================
-       FOOTER
-  ======================================================== -->
+<!-- =====================================================
+     CREATOR SPACE
+===================================================== -->
 
-  <footer id="contact">
+<section>
+
+    <div class="section-label reveal">
+        04 — MY SPACE
+    </div>
+
+    <h2 class="section-title reveal">
+
+        STILL
+
+        <span class="gradient-text">
+            CREATING.
+        </span>
+
+    </h2>
+
+
+    <div class="creator-space reveal">
+
+        <div class="space-grid"></div>
+
+        <div class="neon-ring"></div>
+
+        <div class="space-content">
+
+            <h2>
+
+                CREATE.<br>
+                LEARN.<br>
+                REPEAT.
+
+            </h2>
+
+            <p>
+
+                No limits.
+                Just ideas.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer id="contact">
 
     <div class="section-label">
-      LET'S CONNECT
+        END OF EXPERIENCE
     </div>
+
 
     <div class="signature">
-      Yonas Nickee
+        Yonas Nickee
     </div>
 
-    <div class="socials">
 
-      <a
-        class="social"
-        href="https://youtube.com/@yonaseditz?si=QeAMsgB-EfUsKKXF"
-        target="_blank"
-      >
-        YouTube
-      </a>
+    <div class="social-row"
+         style="justify-content:center;margin-top:35px;">
+
+        <a
+            class="social"
+            href="https://www.instagram.com/yonas26_07/"
+            target="_blank"
+        >
+            INSTAGRAM
+        </a>
+
+
+        <a
+            class="social"
+            href="https://youtube.com/@yonaseditz?si=ti9ct3EUcSuZ20Ol"
+            target="_blank"
+        >
+            YOUTUBE
+        </a>
 
     </div>
 
-    <p>
-      © 2026 Yonas Nickee. All rights reserved.
-    </p>
 
     <p>
-      Designed & created by Yonas Nickee
+        © 2026 Yonas Nickee
     </p>
 
-  </footer>
+
+    <p>
+        Designed & created by Yonas Nickee
+    </p>
+
+</footer>
 
 
-  <!-- =======================================================
-       AUDIO
-       Put your own audio file inside assets/audio/
-       and rename it cinematic.mp3
-  ======================================================== -->
+<!-- =====================================================
+     AUDIO
+===================================================== -->
 
-  <audio id="cinematicAudio" loop preload="auto">
-    <source src="assets/audio/cinematic.mp3" type="audio/mpeg">
-  </audio>
+<audio
+    id="music"
+    loop
+    preload="auto">
 
+    <source
+        src="assets/cinematic.mp3"
+        type="audio/mpeg">
 
-  <script>
-
-    /* =======================================================
-       INTRO
-    ======================================================== */
-
-    const intro = document.getElementById("intro");
-    const enterBtn = document.getElementById("enterBtn");
-    const audio = document.getElementById("cinematicAudio");
-
-    enterBtn.addEventListener("click", () => {
-
-      document.body.classList.remove("locked");
-
-      intro.classList.add("hide");
-
-      audio.volume = 0.18;
-
-      audio.play().catch(() => {
-        console.log("Audio could not start.");
-      });
-
-    });
+</audio>
 
 
-    /* =======================================================
-       PARTICLE GENERATOR
-    ======================================================== */
+<script>
 
-    const particleContainer =
-      document.getElementById("particles");
+/* =====================================================
+   INTRO
+===================================================== */
 
-    for (let i = 0; i < 70; i++) {
+const intro =
+    document.getElementById("intro");
 
-      const particle =
+const enter =
+    document.getElementById("enter");
+
+const music =
+    document.getElementById("music");
+
+
+enter.addEventListener("click",()=>{
+
+    document.body.classList.remove("locked");
+
+    intro.classList.add("hide");
+
+    music.volume=.16;
+
+    music.play().catch(()=>{});
+
+});
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+const particleBox =
+    document.getElementById("particles");
+
+
+for(let i=0;i<90;i++){
+
+    const p =
         document.createElement("div");
 
-      particle.className = "particle";
+    p.className="particle";
 
-      particle.style.left =
-        Math.random() * 100 + "%";
+    const size =
+        Math.random()*3+1;
 
-      particle.style.animationDuration =
-        (Math.random() * 12 + 8) + "s";
+    p.style.width=size+"px";
+    p.style.height=size+"px";
 
-      particle.style.animationDelay =
-        (Math.random() * 10) + "s";
+    p.style.left=
+        Math.random()*100+"%";
 
-      particle.style.opacity =
-        Math.random() * 0.7 + 0.2;
+    p.style.animationDuration=
+        (Math.random()*15+8)+"s";
 
-      const size =
-        Math.random() * 3 + 1;
+    p.style.animationDelay=
+        Math.random()*10+"s";
 
-      particle.style.width = size + "px";
-      particle.style.height = size + "px";
+    particleBox.appendChild(p);
 
-      particleContainer.appendChild(particle);
-
-    }
+}
 
 
-    /* =======================================================
-       MOUSE PARALLAX
-    ======================================================== */
+/* =====================================================
+   CURSOR
+===================================================== */
 
-    const bubbles =
-      document.querySelectorAll(".bubble");
-
-    document.addEventListener("mousemove", (e) => {
-
-      const x =
-        (e.clientX / window.innerWidth - 0.5) * 2;
-
-      const y =
-        (e.clientY / window.innerHeight - 0.5) * 2;
-
-      bubbles.forEach((bubble, index) => {
-
-        const strength =
-          (index + 1) * 8;
-
-        bubble.style.transform =
-          `translate(${x * strength}px, ${y * strength}px)`;
-
-      });
-
-    });
+const cursor =
+    document.querySelector(".cursor-light");
 
 
-    /* =======================================================
-       3D CARD TILT
-    ======================================================== */
+document.addEventListener("mousemove",(e)=>{
 
-    const cards =
-      document.querySelectorAll(".skill-card");
+    cursor.style.left=e.clientX+"px";
+    cursor.style.top=e.clientY+"px";
 
-    cards.forEach(card => {
-
-      card.addEventListener("mousemove", (e) => {
-
-        const rect =
-          card.getBoundingClientRect();
-
-        const x =
-          e.clientX - rect.left;
-
-        const y =
-          e.clientY - rect.top;
-
-        const centerX =
-          rect.width / 2;
-
-        const centerY =
-          rect.height / 2;
-
-        const rotateX =
-          ((y - centerY) / centerY) * -7;
-
-        const rotateY =
-          ((x - centerX) / centerX) * 7;
-
-        card.style.transform =
-          `perspective(800px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)
-           translateY(-10px)`;
-
-      });
-
-      card.addEventListener("mouseleave", () => {
-
-        card.style.transform =
-          "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
-
-      });
-
-    });
+});
 
 
-    /* =======================================================
-       SCROLL REVEAL
-    ======================================================== */
+/* =====================================================
+   REVEAL
+===================================================== */
 
-    const revealElements =
-      document.querySelectorAll(
-        ".section-title, .about-grid, .skills-grid, .youtube-card, .space-container"
-      );
+const observer =
+    new IntersectionObserver(
 
-    const observer =
-      new IntersectionObserver(
-        entries => {
+        entries=>{
 
-          entries.forEach(entry => {
+            entries.forEach(entry=>{
 
-            if (entry.isIntersecting) {
+                if(entry.isIntersecting){
 
-              entry.target.style.opacity = "1";
-              entry.target.style.transform = "translateY(0)";
+                    entry.target.classList.add("show");
 
-            }
+                }
 
-          });
+            });
 
         },
+
         {
-          threshold: 0.12
+            threshold:.12
         }
-      );
+
+    );
 
 
-    revealElements.forEach(el => {
+document
+.querySelectorAll(".reveal")
+.forEach(el=>{
 
-      el.style.opacity = "0";
-      el.style.transform = "translateY(35px)";
-      el.style.transition =
-        "opacity 1s ease, transform 1s ease";
+    observer.observe(el);
 
-      observer.observe(el);
+});
+
+
+/* =====================================================
+   THREE.JS 3D BACKGROUND
+===================================================== */
+
+const container =
+    document.getElementById("three-bg");
+
+
+const scene =
+    new THREE.Scene();
+
+
+const camera =
+    new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth/window.innerHeight,
+        .1,
+        1000
+    );
+
+
+camera.position.z=5;
+
+
+const renderer =
+    new THREE.WebGLRenderer({
+        alpha:true,
+        antialias:true
+    });
+
+
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio,2)
+);
+
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+
+container.appendChild(
+    renderer.domElement
+);
+
+
+/* =====================================================
+   PURPLE 3D SPHERE
+===================================================== */
+
+const geometry =
+    new THREE.IcosahedronGeometry(
+        1.4,
+        4
+    );
+
+
+const material =
+    new THREE.MeshStandardMaterial({
+
+        color:0x6d13ff,
+
+        metalness:.7,
+
+        roughness:.2,
+
+        emissive:0x27005f,
+
+        emissiveIntensity:.7
 
     });
 
-  </script>
+
+const sphere =
+    new THREE.Mesh(
+        geometry,
+        material
+    );
+
+
+sphere.position.x=2.3;
+
+sphere.position.y=.1;
+
+scene.add(sphere);
+
+
+/* =====================================================
+   WIREFRAME
+===================================================== */
+
+const wire =
+    new THREE.Mesh(
+
+        new THREE.IcosahedronGeometry(
+            1.55,
+            2
+        ),
+
+        new THREE.MeshBasicMaterial({
+
+            color:0x00eaff,
+
+            wireframe:true,
+
+            transparent:true,
+
+            opacity:.18
+
+        })
+
+    );
+
+
+wire.position.copy(
+    sphere.position
+);
+
+scene.add(wire);
+
+
+/* =====================================================
+   LIGHTS
+===================================================== */
+
+const purpleLight =
+    new THREE.PointLight(
+        0x9b2cff,
+        6,
+        20
+    );
+
+purpleLight.position.set(
+    3,
+    2,
+    4
+);
+
+scene.add(purpleLight);
+
+
+const cyanLight =
+    new THREE.PointLight(
+        0x00eaff,
+        5,
+        20
+    );
+
+cyanLight.position.set(
+    -4,
+    1,
+    3
+);
+
+scene.add(cyanLight);
+
+
+const goldLight =
+    new THREE.PointLight(
+        0xffc13b,
+        3,
+        15
+    );
+
+goldLight.position.set(
+    0,
+    -3,
+    3
+);
+
+scene.add(goldLight);
+
+
+/* =====================================================
+   STAR PARTICLES
+===================================================== */
+
+const starGeometry =
+    new THREE.BufferGeometry();
+
+const starCount=1000;
+
+const starPositions =
+    new Float32Array(
+        starCount*3
+    );
+
+
+for(let i=0;i<starCount*3;i++){
+
+    starPositions[i]=(
+        Math.random()-.5
+    )*20;
+
+}
+
+
+starGeometry.setAttribute(
+
+    "position",
+
+    new THREE.BufferAttribute(
+        starPositions,
+        3
+    )
+
+);
+
+
+const starMaterial =
+    new THREE.PointsMaterial({
+
+        color:0xa94dff,
+
+        size:.025,
+
+        transparent:true,
+
+        opacity:.7
+
+    });
+
+
+const stars =
+    new THREE.Points(
+        starGeometry,
+        starMaterial
+    );
+
+
+scene.add(stars);
+
+
+/* =====================================================
+   MOUSE 3D MOVEMENT
+===================================================== */
+
+let mouseX=0;
+let mouseY=0;
+
+
+document.addEventListener(
+    "mousemove",
+    e=>{
+
+        mouseX =
+            (e.clientX/window.innerWidth-.5);
+
+        mouseY =
+            (e.clientY/window.innerHeight-.5);
+
+    }
+);
+
+
+/* =====================================================
+   ANIMATION LOOP
+===================================================== */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    sphere.rotation.x+=.002;
+
+    sphere.rotation.y+=.004;
+
+    wire.rotation.x-=.001;
+
+    wire.rotation.y-=.003;
+
+    stars.rotation.y+=.0003;
+
+
+    sphere.position.y =
+        .1+
+        Math.sin(
+            Date.now()*.001
+        )*.15;
+
+
+    camera.position.x +=
+        (mouseX*.3-camera.position.x)*.02;
+
+    camera.position.y +=
+        (-mouseY*.3-camera.position.y)*.02;
+
+    camera.lookAt(
+        scene.position
+    );
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+animate();
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        camera.aspect =
+            window.innerWidth/
+            window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+    }
+);
+
+</script>
 
 </body>
   </html>
