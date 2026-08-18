@@ -1,61 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="iEO8Z70HN32FSmJW9ngOK8O-fUlWG9fhiDnKZQtICAs" />
-
-      <title>Yonas Nickee | Editor & Music Producer</title>
-
-<meta name="description" content="Yonas Nickee - Editor, Music Producer and Creator. Official website, portfolio and social media.">
-
-<meta name="author" content="Yonas Nickee">
-
-<meta property="og:title" content="Yonas Nickee">
-<meta property="og:description" content="Official website of Yonas Nickee">
-<meta property="og:image" content="https://yonasnickee-mkp.github.io/Yonas-Nickee/assetsprofile.jpg">
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Yonas Nickee | Editor • Music Producer</title>
+<title>Yonas Nickee | Editor & Music Producer</title>
 
 <meta name="description"
-      content="Yonas Nickee — Intermediate Editor, Music Producer and Creator.">
+content="Yonas Nickee — Intermediate Editor, Intermediate Music Producer and Creator.">
 
 <meta name="keywords"
-      content="Yonas Nickee, Yonas Editz, Video Editor, Music Producer, Creator">
+content="Yonas Nickee, Yonas Editz, Video Editor, Music Producer, Creator">
 
 <meta name="author" content="Yonas Nickee">
+
+<meta name="google-site-verification"
+content="iEO8Z70HN32FSmJW9ngOK8O-fUlWG9fhiDnKZQtICAs">
 
 <meta name="theme-color" content="#05000d">
 
-<!-- =====================================================
-     FONTS
-===================================================== -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&display=swap"
-      rel="stylesheet">
-
-
-<!-- =====================================================
-     THREE.JS
-===================================================== -->
+rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-
 <style>
 
-/* =====================================================
+/* =========================
    RESET
-===================================================== */
+========================= */
 
 *{
     margin:0;
@@ -84,26 +60,906 @@ a{
 }
 
 
-/* =====================================================
-   CUSTOM CURSOR LIGHT
-===================================================== */
+/* =========================
+   BACKGROUND
+========================= */
 
-.cursor-light{
-
+.bg-orb{
     position:fixed;
+    width:550px;
+    height:550px;
+    border-radius:50%;
+    filter:blur(150px);
+    pointer-events:none;
+    z-index:-5;
+}
 
-    width:350px;
-    height:350px;
+.bg1{
+    background:#8000ff;
+    top:-300px;
+    left:-300px;
+    opacity:.30;
+}
+
+.bg2{
+    background:#00d9ff;
+    right:-350px;
+    top:30%;
+    opacity:.15;
+}
+
+.bg3{
+    background:#ff00c8;
+    bottom:-350px;
+    left:25%;
+    opacity:.15;
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+}
+
+.particle{
+    position:absolute;
+    border-radius:50%;
+    background:#c36cff;
+    box-shadow:0 0 10px #a832ff;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+    }
+    to{
+        transform:translateY(-20vh);
+    }
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    background:
+    radial-gradient(
+        circle,
+        #260047 0%,
+        #090014 45%,
+        #010002 100%
+    );
+
+    transition:1s;
+}
+
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.intro-line{
+    width:280px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #b84cff,
+        #00eaff,
+        transparent
+    );
+}
+
+.intro-mini{
+    margin:25px;
+    color:#c78aff;
+    letter-spacing:7px;
+    font-size:10px;
+}
+
+.signature{
+    font-family:"Pacifico",cursive;
+    color:#ffd66b;
+    font-size:clamp(55px,10vw,120px);
+    transform:rotate(-4deg);
+
+    text-shadow:
+    0 0 5px #ffd66b,
+    0 0 25px #ffbd35,
+    0 0 55px rgba(255,170,0,.6);
+}
+
+.intro-role{
+    margin-top:25px;
+    color:#aaa;
+    letter-spacing:4px;
+    font-size:10px;
+}
+
+.enter{
+    margin-top:40px;
+    padding:15px 30px;
+    border-radius:50px;
+    border:1px solid #9d39ff;
+    background:rgba(130,0,255,.1);
+    color:white;
+    letter-spacing:3px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.enter:hover{
+    transform:scale(1.08);
+    box-shadow:
+    0 0 25px #a42cff,
+    0 0 60px #00d9ff;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+
+    padding:20px 6%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    z-index:1000;
+
+    background:rgba(3,0,7,.55);
+    backdrop-filter:blur(20px);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.06);
+}
+
+.logo{
+    font-family:"Orbitron";
+    font-weight:900;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:#9f37ff;
+    text-shadow:0 0 20px #a633ff;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    color:#888;
+    font-size:10px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+    text-shadow:0 0 15px #a832ff;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:130px 7% 80px;
+
+    overflow:hidden;
+}
+
+#three-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+}
+
+.hero-content{
+    position:relative;
+    z-index:5;
+    width:100%;
+    max-width:1200px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:9px 16px;
+
+    border-radius:50px;
+    border:1px solid rgba(179,72,255,.3);
+
+    background:rgba(120,0,255,.08);
+
+    color:#c184ff;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#00ffb7;
+    box-shadow:0 0 15px #00ffb7;
+}
+
+.hero h1{
+    font-family:"Orbitron";
+    font-size:clamp(48px,9vw,105px);
+    line-height:.95;
+    letter-spacing:-5px;
+    margin-top:30px;
+}
+
+.outline{
+    color:transparent;
+    -webkit-text-stroke:1px #a943ff;
+}
+
+.hero-description{
+    max-width:650px;
+    color:#999;
+    line-height:1.9;
+    margin-top:30px;
+    font-size:14px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:35px;
+}
+
+.btn{
+    padding:15px 25px;
+    border-radius:50px;
+    font-size:10px;
+    letter-spacing:2px;
+    transition:.4s;
+}
+
+.primary{
+    background:
+    linear-gradient(
+        100deg,
+        #8c19ff,
+        #d300ff,
+        #00cfff
+    );
+
+    box-shadow:
+    0 0 30px rgba(157,30,255,.35);
+}
+
+.secondary{
+    border:1px solid #5d2a77;
+    background:rgba(255,255,255,.03);
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+
+/* =========================
+   COMMON SECTION
+========================= */
+
+section{
+    position:relative;
+    max-width:1200px;
+    margin:auto;
+    padding:100px 7%;
+}
+
+.section-label{
+    color:#a75cff;
+    font-size:10px;
+    letter-spacing:5px;
+    margin-bottom:18px;
+}
+
+.section-title{
+    font-family:"Orbitron";
+    font-size:clamp(35px,6vw,65px);
+    margin-bottom:40px;
+}
+
+.gradient-text{
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #b34cff,
+        #00eaff
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-card{
+    padding:35px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(130,20,255,.12),
+        rgba(0,210,255,.05)
+    );
+
+    border:1px solid rgba(180,70,255,.25);
+
+    box-shadow:
+    0 20px 70px rgba(0,0,0,.3);
+}
+
+.about-card p{
+    color:#aaa;
+    line-height:2;
+    font-size:15px;
+    margin-bottom:22px;
+}
+
+.about-card p:last-child{
+    margin-bottom:0;
+}
+
+.about-card strong{
+    color:#fff;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.details-card{
+    margin-top:25px;
+
+    padding:10px 30px;
+
+    border-radius:25px;
+
+    background:
+    rgba(100,20,150,.08);
+
+    border:1px solid rgba(180,70,255,.2);
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+
+    padding:20px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.07);
+}
+
+.detail-row:last-child{
+    border-bottom:0;
+}
+
+.detail-row span{
+    color:#777;
+    font-size:10px;
+    letter-spacing:3px;
+}
+
+.detail-row strong{
+    color:#d49cff;
+    text-align:right;
+    font-size:13px;
+}
+
+
+/* =========================
+   PERSONALITY
+========================= */
+
+.personality-box{
+    margin-top:35px;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,0,200,.06),
+        rgba(0,220,255,.06)
+    );
+
+    border:1px solid rgba(180,70,255,.2);
+}
+
+.personality-title{
+    color:#a75cff;
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:20px;
+}
+
+.personality-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.personality-list span{
+    padding:13px 18px;
+    border-radius:50px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#ddd;
+
+    font-size:11px;
+
+    transition:.3s;
+}
+
+.personality-list span:hover{
+    color:#00eaff;
+    border-color:#00eaff;
+    box-shadow:0 0 20px rgba(0,234,255,.2);
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.skill-card{
+    padding:30px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(150,30,255,.1),
+        rgba(0,200,255,.04)
+    );
+
+    border:1px solid rgba(180,70,255,.2);
+
+    transition:.4s;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+    border-color:#00eaff;
+
+    box-shadow:
+    0 20px 50px rgba(100,0,255,.2);
+}
+
+.skill-icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.skill-card h3{
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.skill-card p{
+    color:#888;
+    line-height:1.8;
+    font-size:13px;
+}
+
+
+/* =========================
+   CREATIVE WORK
+========================= */
+
+.work-box{
+    padding:45px 30px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:
+    radial-gradient(
+        circle at center,
+        rgba(130,30,255,.18),
+        rgba(0,0,0,.1)
+    );
+
+    border:
+    1px solid rgba(180,70,255,.25);
+}
+
+.work-box h2{
+    font-family:"Orbitron";
+    font-size:clamp(28px,5vw,50px);
+    margin-bottom:20px;
+}
+
+.work-box p{
+    color:#999;
+    line-height:1.9;
+    max-width:700px;
+    margin:auto;
+}
+
+
+/* =========================
+   YOUTUBE
+========================= */
+
+.youtube-box{
+    padding:45px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,0,50,.08),
+        rgba(120,0,255,.1)
+    );
+
+    border:1px solid rgba(255,70,100,.2);
+}
+
+.youtube-box h2{
+    font-family:"Orbitron";
+    font-size:clamp(35px,6vw,70px);
+    line-height:.95;
+}
+
+.youtube-box p{
+    color:#999;
+    max-width:650px;
+    line-height:1.9;
+    margin-top:25px;
+}
+
+.social-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:30px;
+}
+
+.social{
+    display:inline-block;
+
+    padding:14px 22px;
+
+    border-radius:50px;
+
+    border:1px solid rgba(180,70,255,.3);
+
+    color:#ddd;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+}
+
+.social:hover{
+    color:#fff;
+    border-color:#00eaff;
+
+    box-shadow:
+    0 0 25px rgba(0,234,255,.2);
+
+    transform:translateY(-3px);
+}
+
+
+/* =========================
+   CREATOR SPACE
+========================= */
+
+.creator-space{
+    min-height:450px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:35px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(140,0,255,.2),
+        #050008 70%
+    );
+
+    border:
+    1px solid rgba(180,70,255,.25);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.neon-ring{
+    width:280px;
+    height:280px;
 
     border-radius:50%;
 
+    border:2px solid #a62cff;
+
+    box-shadow:
+    0 0 30px #a62cff,
+    inset 0 0 30px #a62cff;
+
+    animation:rotate 8s linear infinite;
+}
+
+@keyframes rotate{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.space-content{
+    position:absolute;
+    text-align:center;
+}
+
+.space-content h2{
+    font-family:"Orbitron";
+    font-size:35px;
+    line-height:1.1;
+}
+
+.space-content p{
+    color:#aaa;
+    margin-top:15px;
+}
+
+
+/* =========================
+   ARCADE
+========================= */
+
+#arcade{
+    text-align:center;
+}
+
+.game{
+    max-width:700px;
+    margin:auto;
+
+    padding:25px;
+
+    border-radius:30px;
+
     background:
-        radial-gradient(
-            circle,
-            rgba(174,48,255,.16),
-            rgba(0,200,255,.06) 35%,
-            transparent 70%
-        );
+    rgba(100,0,150,.1);
+
+    border:1px solid rgba(180,70,255,.25);
+}
+
+.game-info{
+    display:flex;
+    justify-content:space-between;
+
+    color:#aaa;
+
+    font-size:10px;
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+}
+
+#gameCanvas{
+    width:100%;
+    height:420px;
+
+    display:block;
+
+    border-radius:20px;
+
+    background:
+    radial-gradient(
+        circle at center,
+        #19002e,
+        #030006
+    );
+
+    border:1px solid rgba(180,70,255,.25);
+
+    touch-action:none;
+}
+
+.game-help{
+    color:#888;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:15px;
+}
+
+.game-button{
+    margin-top:20px;
+
+    padding:13px 25px;
+
+    border-radius:50px;
+
+    border:1px solid #a62cff;
+
+    background:rgba(140,0,255,.1);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:100px 7%;
+    text-align:center;
+
+    border-top:
+    1px solid rgba(255,255,255,.05);
+}
+
+footer .signature{
+    font-size:55px;
+}
+
+footer p{
+    color:#666;
+    font-size:11px;
+    margin-top:15px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    nav{
+        padding:18px 20px;
+    }
+
+    .nav-links{
+        gap:13px;
+    }
+
+    .nav-links a{
+        font-size:8px;
+        letter-spacing:1px;
+    }
+
+    .hero{
+        padding:130px 20px 70px;
+    }
+
+    .hero h1{
+        font-size:48px;
+        letter-spacing:-3px;
+    }
+
+    section{
+        padding:75px 20px;
+    }
+
+    .about-card{
+        padding:25px 20px;
+    }
+
+    .details-card{
+        padding:10px 20px;
+    }
+
+    .detail-row{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .detail-row strong{
+        text-align:left;
+    }
+
+    .skills-grid{
+        grid-template-columns:1fr;
+    }
+
+    .youtube-box{
+        padding:30px 20px;
+    }
+
+    #gameCanvas{
+        height:350px;
+    }
+
+    footer .signature{
+        font-size:42px;
+    }
+
+}
+
+
+/* =========================
+   CURSOR LIGHT
+========================= */
+
+.cursor-light{
+    position:fixed;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
 
     pointer-events:none;
 
@@ -111,1538 +967,17 @@ a{
 
     z-index:9998;
 
+    background:
+    radial-gradient(
+        circle,
+        rgba(170,50,255,.12),
+        transparent 70%
+    );
+
     filter:blur(15px);
-
-}
-
-
-/* =====================================================
-   NOISE
-===================================================== */
-
-body::after{
-
-    content:"";
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:9997;
-
-    opacity:.035;
-
-    background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
-
-}
-
-
-/* =====================================================
-   BACKGROUND
-===================================================== */
-
-.bg-orb{
-
-    position:fixed;
-
-    width:650px;
-    height:650px;
-
-    border-radius:50%;
-
-    filter:blur(160px);
-
-    pointer-events:none;
-
-    z-index:-5;
-
-}
-
-.bg-orb.one{
-
-    background:#7c00ff;
-
-    top:-300px;
-    left:-300px;
-
-    opacity:.28;
-
-}
-
-.bg-orb.two{
-
-    background:#00d9ff;
-
-    right:-350px;
-    top:25%;
-
-    opacity:.14;
-
-}
-
-.bg-orb.three{
-
-    background:#ff00c8;
-
-    bottom:-350px;
-    left:25%;
-
-    opacity:.16;
-
-}
-
-
-/* =====================================================
-   PARTICLES
-===================================================== */
-
-#particles{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-2;
-
-}
-
-.particle{
-
-    position:absolute;
-
-    border-radius:50%;
-
-    background:#c36cff;
-
-    box-shadow:
-        0 0 8px #b238ff,
-        0 0 20px #8e20ff;
-
-    animation:particleMove linear infinite;
-
-}
-
-@keyframes particleMove{
-
-    from{
-        transform:translateY(110vh);
-    }
-
-    to{
-        transform:translateY(-20vh);
-    }
-
-}
-
-
-/* =====================================================
-   CINEMATIC INTRO
-===================================================== */
-
-#intro{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:10000;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    flex-direction:column;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #210044 0%,
-            #090014 38%,
-            #010002 100%
-        );
-
-    transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
-
-}
-
-#intro.hide{
-
-    opacity:0;
-    visibility:hidden;
-
-}
-
-.intro-line{
-
-    width:0;
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #b84cff,
-            #00eaff,
-            transparent
-        );
-
-    animation:introLine 2s ease forwards;
-
-}
-
-@keyframes introLine{
-
-    to{
-        width:280px;
-    }
-
-}
-
-.intro-mini{
-
-    margin:25px 0;
-
-    color:#c78aff;
-
-    letter-spacing:7px;
-
-    font-size:10px;
-
-    text-transform:uppercase;
-
-    opacity:0;
-
-    animation:fadeIn 1.5s ease .5s forwards;
-
-}
-
-.signature{
-
-    font-family:"Pacifico",cursive;
-
-    color:#ffd66b;
-
-    font-size:clamp(55px,10vw,125px);
-
-    transform:rotate(-4deg);
-
-    text-align:center;
-
-    text-shadow:
-
-        0 0 5px #ffd66b,
-
-        0 0 20px #ffbd35,
-
-        0 0 45px rgba(255,170,0,.7),
-
-        0 10px 30px #000;
-
-    opacity:0;
-
-    animation:
-        signatureIn 2s ease .8s forwards,
-        goldPulse 3s ease-in-out 3s infinite;
-
-}
-
-@keyframes signatureIn{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            scale(.65)
-            rotate(-10deg);
-
-        filter:blur(15px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            rotate(-4deg);
-
-        filter:blur(0);
-
-    }
-
-}
-
-@keyframes goldPulse{
-
-    0%,100%{
-
-        filter:brightness(1);
-
-    }
-
-    50%{
-
-        filter:brightness(1.4);
-
-    }
-
-}
-
-.intro-role{
-
-    color:#aaa;
-
-    letter-spacing:5px;
-
-    font-size:10px;
-
-    margin-top:30px;
-
-    opacity:0;
-
-    animation:fadeIn 1s ease 1.8s forwards;
-
-}
-
-.enter{
-
-    margin-top:45px;
-
-    padding:16px 35px;
-
-    border-radius:100px;
-
-    border:1px solid rgba(188,70,255,.5);
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(145,0,255,.15),
-            rgba(0,218,255,.08)
-        );
-
-    color:white;
-
-    letter-spacing:3px;
-
-    font-size:10px;
-
-    cursor:pointer;
-
-    opacity:0;
-
-    animation:fadeIn 1s ease 2.2s forwards;
-
-    transition:.4s;
-
-}
-
-.enter:hover{
-
-    transform:scale(1.08);
-
-    box-shadow:
-        0 0 25px #a42cff,
-        0 0 70px rgba(0,221,255,.2);
-
-}
-
-@keyframes fadeIn{
-
-    to{
-        opacity:1;
-    }
-
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-nav{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    padding:22px 6%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    z-index:1000;
-
-    background:
-        rgba(3,0,7,.35);
-
-    backdrop-filter:blur(20px);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.05);
-
-}
-
-.logo{
-
-    font-family:"Orbitron",sans-serif;
-
-    font-weight:900;
-
-    letter-spacing:3px;
-
-}
-
-.logo span{
-
-    color:#9f37ff;
-
-    text-shadow:
-        0 0 20px #a633ff;
-
-}
-
-.nav-links{
-
-    display:flex;
-
-    gap:30px;
-
-}
-
-.nav-links a{
-
-    color:#888;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    transition:.3s;
-
-}
-
-.nav-links a:hover{
-
-    color:#fff;
-
-    text-shadow:
-        0 0 15px #a832ff;
-
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-
-    min-height:100vh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:130px 7% 80px;
-
-}
-
-#three-bg{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:0;
-
-}
-
-.hero-content{
-
-    position:relative;
-
-    z-index:5;
-
-    width:100%;
-
-    max-width:1200px;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        .7fr;
-
-    gap:60px;
-
-    align-items:center;
-
-}
-
-.hero-left{
-
-    position:relative;
-
-}
-
-.status{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:9px 16px;
-
-    border-radius:100px;
-
-    border:
-        1px solid rgba(179,72,255,.3);
-
-    background:
-        rgba(120,0,255,.08);
-
-    color:#c184ff;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-}
-
-.status-dot{
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#00ffb7;
-
-    box-shadow:
-        0 0 15px #00ffb7;
-
-}
-
-.hero h1{
-
-    font-family:"Orbitron",sans-serif;
-
-    font-size:
-        clamp(48px,8vw,100px);
-
-    line-height:.95;
-
-    letter-spacing:-5px;
-
-    margin-top:30px;
-
-}
-
-.hero h1 .outline{
-
-    color:transparent;
-
-    -webkit-text-stroke:
-        1px #a943ff;
-
-    text-shadow:
-        0 0 35px rgba(161,53,255,.2);
-
-}
-
-.hero-description{
-
-    max-width:650px;
-
-    color:#8d8d8d;
-
-    line-height:1.9;
-
-    margin-top:30px;
-
-    font-size:14px;
-
-}
-
-.hero-buttons{
-
-    display:flex;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-    margin-top:35px;
-
-}
-
-.btn{
-
-    padding:15px 25px;
-
-    border-radius:100px;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    transition:.4s;
-
-}
-
-.primary{
-
-    background:
-        linear-gradient(
-            100deg,
-            #8c19ff,
-            #d300ff,
-            #00cfff
-        );
-
-    box-shadow:
-        0 0 30px rgba(157,30,255,.35);
-
-}
-
-.primary:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:
-        0 0 30px #a629ff,
-        0 0 80px rgba(0,207,255,.25);
-
-}
-
-.secondary{
-
-    border:
-        1px solid rgba(255,255,255,.14);
-
-    background:
-        rgba(255,255,255,.04);
-
-}
-
-.secondary:hover{
-
-    border-color:#b54cff;
-
-    transform:translateY(-5px);
-
-}
-
-
-/* =====================================================
-   PROFILE IMAGE
-===================================================== */
-
-.profile-wrap{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    position:relative;
-
-}
-
-.profile-ring{
-
-    width:min(380px,75vw);
-
-    aspect-ratio:1;
-
-    border-radius:50%;
-
-    padding:5px;
-
-    background:
-        conic-gradient(
-            from 0deg,
-            #8e24ff,
-            #00eaff,
-            #ff00c8,
-            #ffd45c,
-            #8e24ff
-        );
-
-    animation:rotateRing 8s linear infinite;
-
-    box-shadow:
-        0 0 30px rgba(143,34,255,.5),
-        0 0 100px rgba(0,217,255,.15);
-
-}
-
-@keyframes rotateRing{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-.profile-inner{
-
-    width:100%;
-    height:100%;
-
-    border-radius:50%;
-
-    padding:8px;
-
-    background:#08000e;
-
-    animation:counterRotate 8s linear infinite;
-
-}
-
-@keyframes counterRotate{
-
-    to{
-        transform:rotate(-360deg);
-    }
-
-}
-
-.profile-inner img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    display:block;
-
-    filter:
-        contrast(1.08)
-        saturate(1.08);
-
-}
-
-.profile-glow{
-
-    position:absolute;
-
-    width:100%;
-
-    aspect-ratio:1;
-
-    max-width:420px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(143,31,255,.2),
-            transparent 65%
-        );
-
-    filter:blur(35px);
-
-    z-index:-1;
-
-}
-
-
-/* =====================================================
-   FLOATING LABELS
-===================================================== */
-
-.float-label{
-
-    position:absolute;
-
-    padding:13px 18px;
-
-    border-radius:15px;
-
-    background:
-        rgba(8,2,16,.7);
-
-    backdrop-filter:blur(15px);
-
-    border:
-        1px solid rgba(185,76,255,.2);
-
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.4);
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    animation:labelFloat 5s ease-in-out infinite;
-
-}
-
-.label1{
-
-    top:12%;
-
-    right:0;
-
-    color:#00eaff;
-
-}
-
-.label2{
-
-    bottom:15%;
-
-    left:0;
-
-    color:#ff6de8;
-
-    animation-delay:-2s;
-
-}
-
-@keyframes labelFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-15px);
-    }
-
-}
-
-
-/* =====================================================
-   SECTIONS
-===================================================== */
-
-section{
-
-    position:relative;
-
-    padding:
-        130px 7%;
-
-}
-
-.section-label{
-
-    color:#b34cff;
-
-    letter-spacing:4px;
-
-    font-size:9px;
-
-    margin-bottom:18px;
-
-}
-
-.section-title{
-
-    font-family:"Orbitron",sans-serif;
-
-    font-size:
-        clamp(30px,5vw,65px);
-
-    margin-bottom:50px;
-
-}
-
-.gradient-text{
-
-    color:transparent;
-
-    background:
-        linear-gradient(
-            90deg,
-            #a932ff,
-            #00eaff,
-            #ff37d7
-        );
-
-    -webkit-background-clip:text;
-
-}
-
-
-/* =====================================================
-   ABOUT
-===================================================== */
-
-.about-grid{
-
-    max-width:1200px;
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:30px;
-
-}
-
-.glass{
-
-    padding:45px;
-
-    border-radius:30px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(151,45,255,.13),
-            rgba(0,220,255,.035),
-            rgba(255,255,255,.02)
-        );
-
-    backdrop-filter:blur(25px);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.3);
-
-    transition:.5s;
-
-}
-
-.glass:hover{
-
-    transform:
-        translateY(-8px)
-        perspective(1000px)
-        rotateX(2deg);
-
-    border-color:
-        rgba(184,76,255,.35);
-
-}
-
-.about-text{
-
-    color:#929292;
-
-    line-height:2;
-
-    font-size:14px;
-
-}
-
-.about-text strong{
-
-    color:#fff;
-
-}
-
-.info-list{
-
-    display:grid;
-
-    gap:20px;
-
-}
-
-.info-item{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding-bottom:15px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
-
-}
-
-.info-item span:first-child{
-
-    color:#666;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-}
-
-.info-item span:last-child{
-
-    color:#d69bff;
-
-    font-size:12px;
-
-}
-
-
-/* =====================================================
-   SKILLS
-===================================================== */
-
-.skills{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:25px;
-
-}
-
-.skill{
-
-    min-height:290px;
-
-    padding:35px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:30px;
-
-    border:
-        1px solid rgba(255,255,255,.07);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(137,0,255,.14),
-            rgba(0,214,255,.035)
-        );
-
-    transition:.5s;
-
-    transform-style:preserve-3d;
-
-}
-
-.skill:hover{
-
-    transform:
-        perspective(800px)
-        rotateX(6deg)
-        rotateY(-6deg)
-        translateY(-12px);
-
-    box-shadow:
-        0 30px 80px rgba(100,0,200,.25);
-
-}
-
-.skill-number{
-
-    position:absolute;
-
-    right:25px;
-    top:20px;
-
-    font-family:"Orbitron";
-
-    font-size:12px;
-
-    color:#4e315f;
-
-}
-
-.skill-icon{
-
-    font-size:50px;
-
-    margin-bottom:30px;
-
-    filter:
-        drop-shadow(0 0 20px #a12cff);
-
-}
-
-.skill h3{
-
-    font-family:"Orbitron",sans-serif;
-
-    font-size:17px;
-
-}
-
-.skill p{
-
-    color:#777;
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    margin-top:15px;
-
-}
-
-.skill-level{
-
-    margin-top:25px;
-
-    color:#b85dff;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-}
-
-
-/* =====================================================
-   YOUTUBE
-===================================================== */
-
-.youtube-box{
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:60px;
-
-    border-radius:35px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(255,0,110,.18),
-            transparent 30%
-        ),
-        linear-gradient(
-            120deg,
-            rgba(120,0,255,.15),
-            rgba(0,220,255,.04)
-        );
-
-}
-
-.youtube-box::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:350px;
-    height:350px;
-
-    border-radius:50%;
-
-    background:#ff005d;
-
-    filter:blur(150px);
-
-    opacity:.15;
-
-    right:-150px;
-    top:-150px;
-
-}
-
-.youtube-box h2{
-
-    font-family:"Orbitron",sans-serif;
-
-    font-size:
-        clamp(35px,6vw,70px);
-
-}
-
-.youtube-box p{
-
-    max-width:650px;
-
-    color:#888;
-
-    line-height:1.9;
-
-    margin:25px 0 35px;
-
-}
-
-.social-row{
-
-    display:flex;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-}
-
-.social{
-
-    padding:14px 22px;
-
-    border-radius:100px;
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    transition:.3s;
-
-}
-
-.social:hover{
-
-    border-color:#a83dff;
-
-    box-shadow:
-        0 0 25px rgba(168,61,255,.25);
-
-    transform:translateY(-4px);
-
-}
-
-
-/* =====================================================
-   CREATOR SPACE
-===================================================== */
-
-.creator-space{
-
-    min-height:500px;
-
-    border-radius:35px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(128,0,255,.16),
-            #040007 65%
-        );
-
-    border:
-        1px solid rgba(169,65,255,.15);
-
-}
-
-.space-grid{
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-        linear-gradient(
-            rgba(140,40,255,.08) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(140,40,255,.08) 1px,
-            transparent 1px
-        );
-
-    background-size:50px 50px;
-
-    transform:
-        perspective(500px)
-        rotateX(60deg)
-        scale(2);
-
-    transform-origin:center bottom;
-
-}
-
-.space-content{
-
-    position:absolute;
-
-    inset:0;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    flex-direction:column;
-
-    text-align:center;
-
-    z-index:3;
-
-}
-
-.space-content h2{
-
-    font-family:"Orbitron",sans-serif;
-
-    font-size:
-        clamp(30px,6vw,70px);
-
-}
-
-.space-content p{
-
-    color:#777;
-
-    margin-top:20px;
-
-}
-
-.neon-ring{
-
-    position:absolute;
-
-    width:350px;
-    height:350px;
-
-    border-radius:50%;
-
-    border:
-        1px solid rgba(0,220,255,.4);
-
-    box-shadow:
-        0 0 30px rgba(0,220,255,.2),
-        inset 0 0 30px rgba(157,36,255,.15);
-
-    animation:ringSpin 10s linear infinite;
-
-}
-
-@keyframes ringSpin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-
-    padding:
-        100px 7%
-        50px;
-
-    text-align:center;
-
-    border-top:
-        1px solid rgba(255,255,255,.06);
-
-}
-
-footer .signature{
-
-    font-size:
-        clamp(45px,8vw,85px);
-
-}
-
-footer p{
-
-    color:#555;
-
-    font-size:10px;
-
-    letter-spacing:1px;
-
-    margin-top:25px;
-
-}
-
-
-/* =====================================================
-   REVEAL
-===================================================== */
-
-.reveal{
-
-    opacity:0;
-
-    transform:translateY(50px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
-
-}
-
-.reveal.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:850px){
-
-    .nav-links{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    max-width:70vw;
-    scrollbar-width:none;
-}
-
-.nav-links::-webkit-scrollbar{
-    display:none;
-}
-
-.nav-links a{
-    white-space:nowrap;
-    font-size:8px;
-    padding:8px 10px;
-}
-
-    .hero-content{
-
-        grid-template-columns:1fr;
-
-        text-align:center;
-
-    }
-
-    .hero-description{
-
-        margin-left:auto;
-        margin-right:auto;
-
-    }
-
-    .hero-buttons{
-
-        justify-content:center;
-
-    }
-
-    .profile-wrap{
-
-        order:-1;
-
-    }
-
-    .profile-ring{
-
-        width:270px;
-
-    }
-
-    .float-label{
-
-        display:none;
-
-    }
-
-    .about-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .skills{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .youtube-box{
-
-        padding:35px 25px;
-
-    }
-
-    section{
-
-        padding:
-            90px 6%;
-
-    }
-
-    .cursor-light{
-
-        display:none;
-
-    }
-
 }
 
 </style>
-
-
-      <link rel="canonical" href="https://yonasnickee-mkp.github.io/Yonas-Nickee/">
-
-<meta property="og:type" content="profile">
-<meta property="og:url" content="https://yonasnickee-mkp.github.io/Yonas-Nickee/">
-<meta property="og:site_name" content="Yonas Nickee">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Yonas Nickee",
-  "url": "https://yonasnickee-mkp.github.io/Yonas-Nickee/",
-  "image": "https://yonasnickee-mkp.github.io/Yonas-Nickee/assetsprofile.jpg",
-  "jobTitle": "Editor & Music Producer",
-  "sameAs": [
-    "https://www.instagram.com/yonas26_07/",
-    "https://youtube.com/@yonaseditz"
-  ]
-}
-</script>
 
 </head>
 
@@ -1650,16 +985,29 @@ footer p{
 <body class="locked">
 
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- =========================
+     BACKGROUND
+========================= -->
+
+<div class="bg-orb bg1"></div>
+<div class="bg-orb bg2"></div>
+<div class="bg-orb bg3"></div>
+
+<div id="particles"></div>
+
+<div class="cursor-light"></div>
+
+
+<!-- =========================
+     CINEMATIC INTRO
+========================= -->
 
 <div id="intro">
 
     <div class="intro-line"></div>
 
     <div class="intro-mini">
-        WELCOME TO MY DIGITAL WORLD
+        PERSONAL DIGITAL SPACE
     </div>
 
     <div class="signature">
@@ -1677,22 +1025,9 @@ footer p{
 </div>
 
 
-<!-- =====================================================
-     GLOBAL EFFECTS
-===================================================== -->
-
-<div class="cursor-light"></div>
-
-<div class="bg-orb one"></div>
-<div class="bg-orb two"></div>
-<div class="bg-orb three"></div>
-
-<div id="particles"></div>
-
-
-<!-- =====================================================
-     NAV
-===================================================== -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav>
 
@@ -1710,18 +1045,16 @@ footer p{
 
         <a href="#youtube">YOUTUBE</a>
 
-          <a href="director.html">ARCADE 🎮</a>
-
-        <a href="#contact">CONTACT</a>
+        <a href="#arcade">ARCADE 🎮</a>
 
     </div>
 
 </nav>
 
 
-<!-- =====================================================
+<!-- =========================
      HERO
-===================================================== -->
+========================= -->
 
 <section class="hero" id="home">
 
@@ -1729,8 +1062,7 @@ footer p{
 
     <div class="hero-content">
 
-
-        <div class="hero-left reveal">
+        <div>
 
             <div class="status">
 
@@ -1759,11 +1091,12 @@ footer p{
                 Intermediate Editor.
                 Intermediate Music Producer.
 
-                <br>
+                <br><br>
 
                 Exploring visuals, sounds,
                 creativity and everything
-                that makes digital content feel alive.
+                that makes digital content
+                feel alive.
 
             </p>
 
@@ -1774,49 +1107,17 @@ footer p{
                     href="#about"
                     class="btn primary"
                 >
-                    EXPLORE MY WORLD
+                    EXPLORE ME
                 </a>
 
-
                 <a
-                    href="https://www.instagram.com/yonas26_07/"
+                    href="https://youtube.com/@yonaseditz?si=ti9ct3EUcSuZ20Ol"
                     target="_blank"
                     class="btn secondary"
                 >
-                    INSTAGRAM ↗
+                    WATCH MY WORK
                 </a>
 
-            </div>
-
-        </div>
-
-
-        <!-- PROFILE -->
-
-        <div class="profile-wrap reveal">
-
-            <div class="profile-glow"></div>
-
-            <div class="profile-ring">
-
-                <div class="profile-inner">
-
-                    <img
-                        src="assetsprofile.jpg"
-                        alt="Yonas Nickee"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="float-label label1">
-                VIDEO EDITOR
-            </div>
-
-            <div class="float-label label2">
-                MUSIC PRODUCER
             </div>
 
         </div>
@@ -1826,17 +1127,17 @@ footer p{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      ABOUT
-===================================================== -->
+========================= -->
 
 <section id="about">
 
-    <div class="section-label reveal">
+    <div class="section-label">
         01 — IDENTITY
     </div>
 
-    <h2 class="section-title reveal">
+    <h2 class="section-title">
 
         THIS IS
 
@@ -1847,113 +1148,170 @@ footer p{
     </h2>
 
 
-    <div class="about-grid">
+    <div class="about-card">
+
+        <p>
+
+            I'm <strong>Yonas Nickee</strong> —
+            an Intermediate Editor and
+            Intermediate Music Producer.
+
+        </p>
 
 
-        <div class="glass reveal">
+        <p>
 
-            <div class="about-text">
+            I live in
+            <strong>Melakovilpatti,
+            near Dindigul</strong>,
+            Tamil Nadu, and I'm currently
+            studying at
+            <strong>Loyola College,
+            Chennai</strong>.
 
-                I'm
+        </p>
 
-                <strong>
-                    Yonas Nickee
-                </strong>
 
-                — an intermediate editor
-                and music producer.
+        <p>
 
-                <br><br>
+            I am a
+            <strong>talented, kind and smart</strong>
+            person. I value being
+            <strong>punctual</strong> and believe
+            in <strong>hard work</strong>.
 
-                I'm not here to pretend
-                I have everything figured out.
+        </p>
 
-                I'm learning,
-                experimenting,
-                creating and improving
-                one project at a time.
 
-                <br><br>
+        <p>
 
-                This website is my personal
-                digital space — a place where
-                my editing, music and creativity
-                come together.
+            I have created many
+            <strong>devotional</strong> and
+            <strong>cinematic videos</strong>
+            and uploaded them on my
+            YouTube channel.
 
-            </div>
+        </p>
+
+    </div>
+
+
+    <!-- DETAILS -->
+
+    <div class="details-card">
+
+
+        <div class="detail-row">
+
+            <span>NAME</span>
+
+            <strong>
+                Yonas Nickee
+            </strong>
 
         </div>
 
 
-        <div class="glass reveal">
+        <div class="detail-row">
 
-            <div class="info-list">
+            <span>ROLE</span>
 
-                <div class="info-item">
+            <strong>
+                Intermediate Editor
+            </strong>
 
-                    <span>
-                        NAME
-                    </span>
-
-                    <span>
-                        Yonas Nickee
-                    </span>
-
-                </div>
+        </div>
 
 
-                <div class="info-item">
+        <div class="detail-row">
 
-                    <span>
-                        ROLE
-                    </span>
+            <span>MUSIC</span>
 
-                    <span>
-                        Intermediate Editor
-                    </span>
+            <strong>
+                Intermediate Music Producer
+            </strong>
 
-                </div>
+        </div>
 
 
-                <div class="info-item">
+        <div class="detail-row">
 
-                    <span>
-                        MUSIC
-                    </span>
+            <span>LOCATION</span>
 
-                    <span>
-                        Music Producer
-                    </span>
+            <strong>
+                Melakovilpatti, Near Dindigul
+            </strong>
 
-                </div>
+        </div>
 
 
-                <div class="info-item">
+        <div class="detail-row">
 
-                    <span>
-                        YOUTUBE
-                    </span>
+            <span>EDUCATION</span>
 
-                    <span>
-                        Yonas Editz
-                    </span>
+            <strong>
+                Loyola College, Chennai
+            </strong>
 
-                </div>
+        </div>
 
 
-                <div class="info-item">
+        <div class="detail-row">
 
-                    <span>
-                        INSTAGRAM
-                    </span>
+            <span>WORK</span>
 
-                    <span>
-                        @yonas26_07
-                    </span>
+            <strong>
+                Devotional & Cinematic Videos
+            </strong>
 
-                </div>
+        </div>
 
-            </div>
+
+        <div class="detail-row">
+
+            <span>YOUTUBE</span>
+
+            <strong>
+                Yonas Editz
+            </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>INSTAGRAM</span>
+
+            <strong>
+                @yonas26_07
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- PERSONALITY -->
+
+    <div class="personality-box">
+
+        <div class="personality-title">
+            PERSONALITY
+        </div>
+
+
+        <div class="personality-list">
+
+            <span>✨ Talented</span>
+
+            <span>❤️ Kind</span>
+
+            <span>🧠 Smart</span>
+
+            <span>⏱️ Punctual</span>
+
+            <span>💪 Hardworking</span>
 
         </div>
 
@@ -1962,17 +1320,17 @@ footer p{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      SKILLS
-===================================================== -->
+========================= -->
 
 <section id="skills">
 
-    <div class="section-label reveal">
+    <div class="section-label">
         02 — CREATIVE SKILLS
     </div>
 
-    <h2 class="section-title reveal">
+    <h2 class="section-title">
 
         WHAT I
 
@@ -1983,87 +1341,91 @@ footer p{
     </h2>
 
 
-    <div class="skills">
+    <div class="skills-grid">
 
 
-        <div class="skill reveal">
-
-            <div class="skill-number">
-                01
-            </div>
+        <div class="skill-card">
 
             <div class="skill-icon">
                 🎬
             </div>
 
             <h3>
-                VIDEO EDITING
+                Video Editing
             </h3>
 
             <p>
-                Creative video editing,
-                transitions, visual effects,
-                timing and storytelling.
-            </p>
 
-            <div class="skill-level">
-                INTERMEDIATE
-            </div>
+                Intermediate video editor
+                focused on cinematic,
+                devotional and creative
+                visual content.
+
+            </p>
 
         </div>
 
 
-        <div class="skill reveal">
-
-            <div class="skill-number">
-                02
-            </div>
+        <div class="skill-card">
 
             <div class="skill-icon">
-                🎧
+                🎵
             </div>
 
             <h3>
-                MUSIC PRODUCTION
+                Music Production
             </h3>
 
             <p>
-                Exploring sounds,
-                music creation,
-                arrangements and
-                digital production.
-            </p>
 
-            <div class="skill-level">
-                INTERMEDIATE
-            </div>
+                Intermediate music producer
+                interested in creating sounds
+                and music for creative projects.
+
+            </p>
 
         </div>
 
 
-        <div class="skill reveal">
-
-            <div class="skill-number">
-                03
-            </div>
+        <div class="skill-card">
 
             <div class="skill-icon">
-                ⚡
+                🎞️
             </div>
 
             <h3>
-                CONTENT CREATION
+                Cinematic Content
             </h3>
 
             <p>
-                Creating digital content,
-                experimenting with ideas
-                and sharing them online.
+
+                Creating cinematic videos
+                with visual storytelling,
+                atmosphere and creative
+                presentation.
+
             </p>
 
-            <div class="skill-level">
-                CREATIVE MODE
+        </div>
+
+
+        <div class="skill-card">
+
+            <div class="skill-icon">
+                ✨
             </div>
+
+            <h3>
+                Creative Content
+            </h3>
+
+            <p>
+
+                Exploring new ideas,
+                experimenting with visuals,
+                sounds and digital creativity.
+
+            </p>
 
         </div>
 
@@ -2072,17 +1434,67 @@ footer p{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
+     CREATIVE WORK
+========================= -->
+
+<section>
+
+    <div class="section-label">
+        03 — CREATIVE JOURNEY
+    </div>
+
+    <h2 class="section-title">
+
+        MY
+
+        <span class="gradient-text">
+            WORK.
+        </span>
+
+    </h2>
+
+
+    <div class="work-box">
+
+        <h2>
+            DEVOTIONAL
+            <br>
+            &
+            <br>
+            CINEMATIC
+        </h2>
+
+
+        <p>
+
+            I have created many devotional
+            and cinematic videos and shared
+            them through my YouTube channel.
+
+            My creative journey combines
+            editing, music, visuals and
+            storytelling.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
      YOUTUBE
-===================================================== -->
+========================= -->
 
 <section id="youtube">
 
-    <div class="section-label reveal">
-        03 — DIGITAL CHANNEL
+    <div class="section-label">
+        04 — DIGITAL CHANNEL
     </div>
 
-    <h2 class="section-title reveal">
+
+    <h2 class="section-title">
 
         YONAS
 
@@ -2093,34 +1505,42 @@ footer p{
     </h2>
 
 
-    <div class="youtube-box reveal">
+    <div class="youtube-box">
 
         <h2>
-            CREATE.<br>
-            EDIT.<br>
+
+            CREATE.
+            <br>
+
+            EDIT.
+            <br>
+
             UPLOAD.
+
         </h2>
 
 
         <p>
 
-            My YouTube channel is focused mainly
-            on editing content and some news uploads.
-
-            It's one of the places where I share
-            what I create and experiment with.
+            My YouTube channel is focused
+            mainly on editing content,
+            devotional videos, cinematic
+            videos and some news uploads.
 
         </p>
 
 
         <div class="social-row">
 
+
             <a
                 class="social"
                 href="https://youtube.com/@yonaseditz?si=ti9ct3EUcSuZ20Ol"
                 target="_blank"
             >
+
                 ▶ YOUTUBE
+
             </a>
 
 
@@ -2129,8 +1549,11 @@ footer p{
                 href="https://www.instagram.com/yonas26_07/"
                 target="_blank"
             >
+
                 ◎ INSTAGRAM
+
             </a>
+
 
         </div>
 
@@ -2139,17 +1562,18 @@ footer p{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      CREATOR SPACE
-===================================================== -->
+========================= -->
 
 <section>
 
-    <div class="section-label reveal">
-        04 — MY SPACE
+    <div class="section-label">
+        05 — MY SPACE
     </div>
 
-    <h2 class="section-title reveal">
+
+    <h2 class="section-title">
 
         STILL
 
@@ -2160,27 +1584,28 @@ footer p{
     </h2>
 
 
-    <div class="creator-space reveal">
-
-        <div class="space-grid"></div>
+    <div class="creator-space">
 
         <div class="neon-ring"></div>
+
 
         <div class="space-content">
 
             <h2>
 
-                CREATE.<br>
-                LEARN.<br>
+                CREATE.
+                <br>
+
+                LEARN.
+                <br>
+
                 REPEAT.
 
             </h2>
 
+
             <p>
-
-                No limits.
-                Just ideas.
-
+                No limits. Just ideas.
             </p>
 
         </div>
@@ -2190,11 +1615,84 @@ footer p{
 </section>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+<!-- =========================
+     ARCADE GAME
+========================= -->
 
-<footer id="contact">
+<section id="arcade">
+
+    <div class="section-label">
+        06 — ARCADE
+    </div>
+
+
+    <h2 class="section-title">
+
+        DIRECTOR
+
+        <span class="gradient-text">
+            CHALLENGE.
+        </span>
+
+    </h2>
+
+
+    <div class="game">
+
+
+        <div class="game-info">
+
+            <span>
+                SCORE:
+                <b id="score">0</b>
+            </span>
+
+            <span>
+                TIME:
+                <b id="time">30</b>
+            </span>
+
+        </div>
+
+
+        <canvas id="gameCanvas"></canvas>
+
+
+        <p class="game-help">
+
+            🎮 Move the glowing character
+            and collect the purple targets.
+
+            <br>
+
+            📱 Mobile:
+            Drag your finger on the game.
+
+            <br>
+
+            💻 PC:
+            Use your mouse.
+
+        </p>
+
+
+        <button
+            class="game-button"
+            id="startGame"
+        >
+            START GAME
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
 
     <div class="section-label">
         END OF EXPERIENCE
@@ -2206,8 +1704,11 @@ footer p{
     </div>
 
 
-    <div class="social-row"
-         style="justify-content:center;margin-top:35px;">
+    <div
+        class="social-row"
+        style="justify-content:center;"
+    >
+
 
         <a
             class="social"
@@ -2226,6 +1727,7 @@ footer p{
             YOUTUBE
         </a>
 
+
     </div>
 
 
@@ -2241,172 +1743,147 @@ footer p{
 </footer>
 
 
-<!-- =====================================================
-     AUDIO
-===================================================== -->
-
-<audio
-    id="music"
-    loop
-    preload="auto">
-
-    <source
-        src="assets/cinematic.mp3"
-        type="audio/mpeg">
-
-</audio>
-
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
-/* =====================================================
+
+/* =========================
    INTRO
-===================================================== */
+========================= */
 
 const intro =
-    document.getElementById("intro");
+document.getElementById("intro");
 
 const enter =
-    document.getElementById("enter");
-
-const music =
-    document.getElementById("music");
+document.getElementById("enter");
 
 
-enter.addEventListener("click",()=>{
+enter.addEventListener(
+"click",
+function(){
 
-    document.body.classList.remove("locked");
+    document.body.classList.remove(
+        "locked"
+    );
 
-    intro.classList.add("hide");
-
-    music.volume=.16;
-
-    music.play().catch(()=>{});
+    intro.classList.add(
+        "hide"
+    );
 
 });
 
 
-/* =====================================================
+/* =========================
    PARTICLES
-===================================================== */
+========================= */
 
 const particleBox =
-    document.getElementById("particles");
+document.getElementById(
+    "particles"
+);
 
 
-for(let i=0;i<90;i++){
+for(
+    let i=0;
+    i<80;
+    i++
+){
 
     const p =
-        document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     p.className="particle";
 
     const size =
-        Math.random()*3+1;
+    Math.random()*3+1;
 
-    p.style.width=size+"px";
-    p.style.height=size+"px";
+    p.style.width =
+    size+"px";
 
-    p.style.left=
-        Math.random()*100+"%";
+    p.style.height =
+    size+"px";
 
-    p.style.animationDuration=
-        (Math.random()*15+8)+"s";
+    p.style.left =
+    Math.random()*100+"%";
 
-    p.style.animationDelay=
-        Math.random()*10+"s";
+    p.style.animationDuration =
+    (Math.random()*15+8)+"s";
+
+    p.style.animationDelay =
+    Math.random()*10+"s";
 
     particleBox.appendChild(p);
 
 }
 
 
-/* =====================================================
-   CURSOR
-===================================================== */
+/* =========================
+   CURSOR LIGHT
+========================= */
 
 const cursor =
-    document.querySelector(".cursor-light");
+document.querySelector(
+    ".cursor-light"
+);
 
 
-document.addEventListener("mousemove",(e)=>{
+document.addEventListener(
+"mousemove",
+function(e){
 
-    cursor.style.left=e.clientX+"px";
-    cursor.style.top=e.clientY+"px";
+    cursor.style.left =
+    e.clientX+"px";
 
-});
-
-
-/* =====================================================
-   REVEAL
-===================================================== */
-
-const observer =
-    new IntersectionObserver(
-
-        entries=>{
-
-            entries.forEach(entry=>{
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add("show");
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold:.12
-        }
-
-    );
-
-
-document
-.querySelectorAll(".reveal")
-.forEach(el=>{
-
-    observer.observe(el);
+    cursor.style.top =
+    e.clientY+"px";
 
 });
 
 
-/* =====================================================
-   THREE.JS 3D BACKGROUND
-===================================================== */
+/* =========================
+   THREE.JS
+========================= */
 
 const container =
-    document.getElementById("three-bg");
+document.getElementById(
+    "three-bg"
+);
 
 
 const scene =
-    new THREE.Scene();
+new THREE.Scene();
 
 
 const camera =
-    new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth/window.innerHeight,
-        .1,
-        1000
-    );
+new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth /
+    window.innerHeight,
+    .1,
+    1000
+);
 
 
 camera.position.z=5;
 
 
 const renderer =
-    new THREE.WebGLRenderer({
-        alpha:true,
-        antialias:true
-    });
+new THREE.WebGLRenderer({
+    alpha:true,
+    antialias:true
+});
 
 
 renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio,2)
+    Math.min(
+        window.devicePixelRatio,
+        2
+    )
 );
 
 
@@ -2421,72 +1898,70 @@ container.appendChild(
 );
 
 
-/* =====================================================
-   PURPLE 3D SPHERE
-===================================================== */
+/* =========================
+   3D SPHERE
+========================= */
 
 const geometry =
-    new THREE.IcosahedronGeometry(
-        1.4,
-        4
-    );
+new THREE.IcosahedronGeometry(
+    1.4,
+    4
+);
 
 
 const material =
-    new THREE.MeshStandardMaterial({
+new THREE.MeshStandardMaterial({
 
-        color:0x6d13ff,
+    color:0x6d13ff,
 
-        metalness:.7,
+    metalness:.7,
 
-        roughness:.2,
+    roughness:.2,
 
-        emissive:0x27005f,
+    emissive:0x27005f,
 
-        emissiveIntensity:.7
+    emissiveIntensity:.7
 
-    });
+});
 
 
 const sphere =
-    new THREE.Mesh(
-        geometry,
-        material
-    );
+new THREE.Mesh(
+    geometry,
+    material
+);
 
 
 sphere.position.x=2.3;
 
-sphere.position.y=.1;
-
 scene.add(sphere);
 
 
-/* =====================================================
+/* =========================
    WIREFRAME
-===================================================== */
+========================= */
 
 const wire =
-    new THREE.Mesh(
+new THREE.Mesh(
 
-        new THREE.IcosahedronGeometry(
-            1.55,
-            2
-        ),
+    new THREE.IcosahedronGeometry(
+        1.55,
+        2
+    ),
 
-        new THREE.MeshBasicMaterial({
+    new THREE.MeshBasicMaterial({
 
-            color:0x00eaff,
+        color:0x00eaff,
 
-            wireframe:true,
+        wireframe:true,
 
-            transparent:true,
+        transparent:true,
 
-            opacity:.18
+        opacity:.2
 
-        })
+    })
 
-    );
+);
 
 
 wire.position.copy(
@@ -2496,16 +1971,16 @@ wire.position.copy(
 scene.add(wire);
 
 
-/* =====================================================
+/* =========================
    LIGHTS
-===================================================== */
+========================= */
 
 const purpleLight =
-    new THREE.PointLight(
-        0x9b2cff,
-        6,
-        20
-    );
+new THREE.PointLight(
+    0x9b2cff,
+    6,
+    20
+);
 
 purpleLight.position.set(
     3,
@@ -2513,15 +1988,17 @@ purpleLight.position.set(
     4
 );
 
-scene.add(purpleLight);
+scene.add(
+    purpleLight
+);
 
 
 const cyanLight =
-    new THREE.PointLight(
-        0x00eaff,
-        5,
-        20
-    );
+new THREE.PointLight(
+    0x00eaff,
+    5,
+    20
+);
 
 cyanLight.position.set(
     -4,
@@ -2529,15 +2006,17 @@ cyanLight.position.set(
     3
 );
 
-scene.add(cyanLight);
+scene.add(
+    cyanLight
+);
 
 
 const goldLight =
-    new THREE.PointLight(
-        0xffc13b,
-        3,
-        15
-    );
+new THREE.PointLight(
+    0xffc13b,
+    3,
+    15
+);
 
 goldLight.position.set(
     0,
@@ -2545,29 +2024,34 @@ goldLight.position.set(
     3
 );
 
-scene.add(goldLight);
+scene.add(
+    goldLight
+);
 
 
-/* =====================================================
-   STAR PARTICLES
-===================================================== */
+/* =========================
+   STARS
+========================= */
 
 const starGeometry =
-    new THREE.BufferGeometry();
+new THREE.BufferGeometry();
 
-const starCount=1000;
+const starCount=800;
 
-const starPositions =
-    new Float32Array(
-        starCount*3
-    );
+const positions =
+new Float32Array(
+    starCount*3
+);
 
 
-for(let i=0;i<starCount*3;i++){
+for(
+    let i=0;
+    i<starCount*3;
+    i++
+){
 
-    starPositions[i]=(
-        Math.random()-.5
-    )*20;
+    positions[i] =
+    (Math.random()-.5)*20;
 
 }
 
@@ -2577,7 +2061,7 @@ starGeometry.setAttribute(
     "position",
 
     new THREE.BufferAttribute(
-        starPositions,
+        positions,
         3
     )
 
@@ -2585,54 +2069,51 @@ starGeometry.setAttribute(
 
 
 const starMaterial =
-    new THREE.PointsMaterial({
+new THREE.PointsMaterial({
 
-        color:0xa94dff,
+    color:0xa94dff,
 
-        size:.025,
+    size:.025,
 
-        transparent:true,
+    transparent:true,
 
-        opacity:.7
+    opacity:.7
 
-    });
+});
 
 
 const stars =
-    new THREE.Points(
-        starGeometry,
-        starMaterial
-    );
+new THREE.Points(
+    starGeometry,
+    starMaterial
+);
 
 
 scene.add(stars);
 
 
-/* =====================================================
-   MOUSE 3D MOVEMENT
-===================================================== */
+/* =========================
+   3D ANIMATION
+========================= */
 
 let mouseX=0;
 let mouseY=0;
 
 
 document.addEventListener(
-    "mousemove",
-    e=>{
+"mousemove",
+function(e){
 
-        mouseX =
-            (e.clientX/window.innerWidth-.5);
+    mouseX =
+    e.clientX /
+    window.innerWidth - .5;
 
-        mouseY =
-            (e.clientY/window.innerHeight-.5);
+    mouseY =
+    e.clientY /
+    window.innerHeight - .5;
 
-    }
-);
+});
 
-
-/* =====================================================
-   ANIMATION LOOP
-===================================================== */
 
 function animate(){
 
@@ -2641,29 +2122,36 @@ function animate(){
     );
 
 
-    sphere.rotation.x+=.002;
+    sphere.rotation.x += .002;
 
-    sphere.rotation.y+=.004;
+    sphere.rotation.y += .004;
 
-    wire.rotation.x-=.001;
+    wire.rotation.x -= .001;
 
-    wire.rotation.y-=.003;
+    wire.rotation.y -= .003;
 
-    stars.rotation.y+=.0003;
+    stars.rotation.y += .0003;
 
 
     sphere.position.y =
-        .1+
-        Math.sin(
-            Date.now()*.001
-        )*.15;
+    Math.sin(
+        Date.now()*.001
+    )*.15;
 
 
     camera.position.x +=
-        (mouseX*.3-camera.position.x)*.02;
+    (
+        mouseX*.3 -
+        camera.position.x
+    )*.02;
+
 
     camera.position.y +=
-        (-mouseY*.3-camera.position.y)*.02;
+    (
+        -mouseY*.3 -
+        camera.position.y
+    )*.02;
+
 
     camera.lookAt(
         scene.position
@@ -2681,29 +2169,442 @@ function animate(){
 animate();
 
 
-/* =====================================================
+/* =========================
    RESIZE
-===================================================== */
+========================= */
 
 window.addEventListener(
-    "resize",
-    ()=>{
+"resize",
+function(){
 
-        camera.aspect =
-            window.innerWidth/
-            window.innerHeight;
+    camera.aspect =
+    window.innerWidth /
+    window.innerHeight;
 
-        camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
 
-        renderer.setSize(
-            window.innerWidth,
-            window.innerHeight
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+});
+
+
+/* =========================
+   DIRECTOR GAME
+========================= */
+
+const canvas =
+document.getElementById(
+    "gameCanvas"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+
+let score=0;
+
+let time=30;
+
+let playing=false;
+
+let timer;
+
+
+let player={
+    x:0,
+    y:0,
+    r:18
+};
+
+
+let target={
+    x:0,
+    y:0,
+    r:10
+};
+
+
+/* =========================
+   CANVAS SIZE
+========================= */
+
+function resizeGame(){
+
+    canvas.width =
+    canvas.clientWidth;
+
+    canvas.height =
+    canvas.clientHeight;
+
+    player.x =
+    canvas.width/2;
+
+    player.y =
+    canvas.height-60;
+
+}
+
+resizeGame();
+
+
+window.addEventListener(
+"resize",
+resizeGame
+);
+
+
+/* =========================
+   NEW TARGET
+========================= */
+
+function newTarget(){
+
+    target.x =
+    30 +
+    Math.random() *
+    (canvas.width-60);
+
+    target.y =
+    40 +
+    Math.random() *
+    (canvas.height-100);
+
+}
+
+
+/* =========================
+   DRAW GAME
+========================= */
+
+function drawGame(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* background grid */
+
+    ctx.strokeStyle =
+    "rgba(160,50,255,.08)";
+
+    ctx.lineWidth=1;
+
+
+    for(
+        let x=0;
+        x<canvas.width;
+        x+=40
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(x,0);
+
+        ctx.lineTo(
+            x,
+            canvas.height
         );
 
+        ctx.stroke();
+
     }
-);
+
+
+    for(
+        let y=0;
+        y<canvas.height;
+        y+=40
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(0,y);
+
+        ctx.lineTo(
+            canvas.width,
+            y
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    /* target */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        target.x,
+        target.y,
+        target.r,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle="#b347ff";
+
+    ctx.shadowBlur=25;
+
+    ctx.shadowColor="#b347ff";
+
+    ctx.fill();
+
+    ctx.shadowBlur=0;
+
+
+    /* player */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        player.x,
+        player.y,
+        player.r,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle="#00eaff";
+
+    ctx.shadowBlur=30;
+
+    ctx.shadowColor="#00eaff";
+
+    ctx.fill();
+
+    ctx.shadowBlur=0;
+
+
+    /* character head */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        player.x,
+        player.y-25,
+        10,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle="#ffd0a6";
+
+    ctx.fill();
+
+}
+
+
+drawGame();
+
+
+/* =========================
+   GAME LOOP
+========================= */
+
+function gameLoop(){
+
+    if(!playing){
+        return;
+    }
+
+    drawGame();
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+/* =========================
+   START GAME
+========================= */
+
+document
+.getElementById("startGame")
+.addEventListener(
+"click",
+function(){
+
+    score=0;
+
+    time=30;
+
+    playing=true;
+
+    document.getElementById(
+        "score"
+    ).textContent=score;
+
+    document.getElementById(
+        "time"
+    ).textContent=time;
+
+    newTarget();
+
+    clearInterval(timer);
+
+
+    timer=setInterval(
+    function(){
+
+        time--;
+
+        document.getElementById(
+            "time"
+        ).textContent=time;
+
+
+        if(time<=0){
+
+            clearInterval(timer);
+
+            playing=false;
+
+            alert(
+                "Game Over! Your score: "
+                +score
+            );
+
+        }
+
+    },
+    1000
+    );
+
+
+    gameLoop();
+
+});
+
+
+/* =========================
+   PLAYER MOVE
+========================= */
+
+function movePlayer(
+    clientX,
+    clientY
+){
+
+    if(!playing){
+        return;
+    }
+
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+
+    player.x =
+    clientX -
+    rect.left;
+
+
+    player.y =
+    clientY -
+    rect.top;
+
+
+    player.x =
+    Math.max(
+        player.r,
+        Math.min(
+            canvas.width-player.r,
+            player.x
+        )
+    );
+
+
+    player.y =
+    Math.max(
+        player.r,
+        Math.min(
+            canvas.height-player.r,
+            player.y
+        )
+    );
+
+
+    const dx =
+    player.x-target.x;
+
+    const dy =
+    player.y-target.y;
+
+    const distance =
+    Math.sqrt(
+        dx*dx+dy*dy
+    );
+
+
+    if(
+        distance <
+        player.r+target.r
+    ){
+
+        score++;
+
+        document.getElementById(
+            "score"
+        ).textContent=score;
+
+        newTarget();
+
+    }
+
+}
+
+
+/* =========================
+   MOUSE GAME
+========================= */
+
+canvas.addEventListener(
+"mousemove",
+function(e){
+
+    movePlayer(
+        e.clientX,
+        e.clientY
+    );
+
+});
+
+
+/* =========================
+   MOBILE GAME
+========================= */
+
+canvas.addEventListener(
+"touchmove",
+function(e){
+
+    e.preventDefault();
+
+    const touch =
+    e.touches[0];
+
+    movePlayer(
+        touch.clientX,
+        touch.clientY
+    );
+
+},
+{
+    passive:false
+});
+
 
 </script>
 
 </body>
-  </html>
+</html>
