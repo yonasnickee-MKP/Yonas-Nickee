@@ -1,566 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<title>Yonas Director Mode</title>
 
-    <title>Yonas Director Mode</title>
+<style>
 
-    <style>
-
-      
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background:
-                radial-gradient(
-                    circle at center,
-                    #210044,
-                    #06000c 60%,
-                    #000
-                );
-
-            color: white;
-            font-family: Arial, sans-serif;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-        }
-
-        .game {
-            width: 100%;
-            max-width: 1100px;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .title {
-            font-size: 12px;
-            letter-spacing: 5px;
-            color: #b85cff;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: clamp(35px, 7vw, 80px);
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 35px;
-        }
-
-        .scene {
-            position: relative;
-
-            width: 100%;
-            height: min(55vh, 550px);
-
-            border-radius: 25px;
-
-            overflow: hidden;
-
-            border:
-                1px solid rgba(181, 76, 255, .4);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #12001f,
-                    #030006
-                );
-
-            box-shadow:
-                0 0 50px
-                rgba(146, 35, 255, .2);
-        }
-
-        .scene::before {
-            content: "";
-
-            position: absolute;
-
-            width: 250px;
-            height: 250px;
-
-            border-radius: 50%;
-
-            background: #8d22ff;
-
-            filter: blur(100px);
-
-            opacity: .25;
-
-            left: 20%;
-            top: 20%;
-        }
-
-        .subject {
-            position: absolute;
-
-            width: 90px;
-            height: 160px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #d15cff,
-                    #5010a0
-                );
-
-            border-radius: 45px 45px 20px 20px;
-
-            left: 15%;
-            bottom: 20%;
-
-            box-shadow:
-                0 0 40px
-                rgba(190, 60, 255, .6);
-
-            animation:
-                walk 6s linear infinite;
-        }
-
-        @keyframes walk {
-
-            0% {
-                left: 10%;
-            }
-
-            50% {
-                left: 75%;
-            }
-
-            100% {
-                left: 10%;
-            }
-
-        }
-
-        .camera-label {
-            position: absolute;
-
-            top: 20px;
-            left: 25px;
-
-            padding: 8px 15px;
-
-            border-radius: 50px;
-
-            background:
-                rgba(0, 0, 0, .5);
-
-            border:
-                1px solid
-                rgba(255,255,255,.1);
-
-            font-size: 10px;
-
-            letter-spacing: 2px;
-        }
-
-        .score {
-            margin: 20px 0;
-
-            font-size: 14px;
-
-            color: #00eaff;
-        }
-
-        .controls {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            flex-wrap: wrap;
-
-            margin-top: 20px;
-        }
-
-        button {
-
-            padding: 13px 20px;
-
-            border-radius: 50px;
-
-            border:
-                1px solid
-                rgba(180,70,255,.4);
-
-            background:
-                rgba(120,0,255,.1);
-
-            color: white;
-
-            cursor: pointer;
-
-            font-size: 10px;
-
-            letter-spacing: 2px;
-
-            transition: .3s;
-        }
-
-        button:hover {
-
-            background:
-                rgba(160,40,255,.3);
-
-            box-shadow:
-                0 0 25px
-                rgba(160,40,255,.5);
-
-            transform:
-                translateY(-3px);
-        }
-
-        #mission {
-
-    margin-top:20px;
-
-    color:#aaa;
-
-    font-size:11px;
-
-    letter-spacing:3px;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-#target {
-
-    color:#00eaff;
-
-    font-weight:bold;
-
-    text-shadow:
-        0 0 15px #00eaff;
+body{
+    min-height:100vh;
+    background:#030006;
+    color:white;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
 }
 
-#timer {
+/* INTRO */
 
-    margin-top:10px;
-
-    font-family:monospace;
-
-    font-size:28px;
-
-    color:#ff4bd8;
-
-    text-shadow:
-        0 0 20px #ff00c8;
-}
-
-#combo {
-
-    margin-top:8px;
-
-    color:#b85cff;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-}
-
-      #tutorial {
-
+#intro{
     position:fixed;
-
     inset:0;
-
-    z-index:9999;
-
+    z-index:1000;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    padding:20px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(80,0,150,.45),
-            rgba(0,0,0,.97)
-        );
-
-    backdrop-filter:blur(15px);
-
-}
-
-
-.tutorial-box {
-
-    width:100%;
-
-    max-width:600px;
-
-    max-height:90vh;
-
-    overflow:auto;
-
-    padding:35px;
-
-    border-radius:25px;
-
     text-align:center;
-
     background:
-        linear-gradient(
-            145deg,
-            rgba(35,0,60,.95),
-            rgba(5,0,12,.98)
-        );
-
-    border:
-        1px solid
-        rgba(190,80,255,.5);
-
-    box-shadow:
-        0 0 60px
-        rgba(150,30,255,.35);
-
+    radial-gradient(circle at center,#350064,#030006 65%);
 }
 
+.intro-box{
+    width:90%;
+    max-width:650px;
+}
 
-.tutorial-tag {
-
+.small-title{
     color:#00eaff;
-
-    font-size:10px;
-
-    letter-spacing:5px;
-
-    margin-bottom:15px;
+    font-size:11px;
+    letter-spacing:6px;
+    margin-bottom:20px;
 }
 
-
-.tutorial-box h1 {
-
-    font-size:
-        clamp(30px,7vw,55px);
-
-    margin-bottom:5px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #d05cff,
-            #00eaff
-        );
-
+.intro-box h1{
+    font-size:clamp(40px,10vw,90px);
+    letter-spacing:5px;
+    background:linear-gradient(90deg,#fff,#d65cff,#00eaff);
     -webkit-background-clip:text;
-
     color:transparent;
 }
 
-
-.tutorial-sub {
-
-    color:#888;
-
-    letter-spacing:3px;
-
-    font-size:10px;
-
-    margin-bottom:30px;
-}
-
-
-.tutorial-content {
-
-    text-align:left;
-
+.intro-box p{
     color:#aaa;
-
-    line-height:1.7;
-
-    font-size:14px;
-}
-
-
-.tutorial-content strong {
-
-    color:#00eaff;
-
-}
-
-
-.tutorial-content b {
-
-    color:#fff;
-}
-
-
-.tutorial-buttons {
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:8px;
-
-    margin:
-        10px 0 20px;
-}
-
-
-.tutorial-buttons span {
-
-    padding:8px 12px;
-
-    border-radius:30px;
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-    color:#fff;
-
-    border:
-        1px solid
-        rgba(180,70,255,.5);
-
-    background:
-        rgba(120,20,255,.12);
-
-}
-
-
-.start-game {
-
-    margin-top:20px;
-
-    padding:15px 30px;
-
-    border:0;
-
-    border-radius:50px;
-
-    color:#fff;
-
-    font-weight:bold;
-
+    margin-top:15px;
     letter-spacing:2px;
+}
 
+.start{
+    margin-top:35px;
+    padding:16px 35px;
+    border:0;
+    border-radius:50px;
+    color:white;
+    background:linear-gradient(90deg,#8b2cff,#00bfff);
     cursor:pointer;
+    font-weight:bold;
+    letter-spacing:2px;
+    box-shadow:0 0 30px #752cff;
+}
 
+/* GAME */
+
+#game{
+    display:none;
+    width:100%;
+    height:100vh;
+    padding:15px;
+}
+
+.top{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 10px;
+}
+
+.logo{
+    color:#00eaff;
+    letter-spacing:3px;
+    font-size:12px;
+}
+
+.stats{
+    display:flex;
+    gap:20px;
+    font-size:11px;
+    color:#aaa;
+}
+
+.stats span{
+    color:white;
+}
+
+/* CINEMA */
+
+.cinema{
+    position:relative;
+    width:100%;
+    height:calc(100vh - 190px);
+    min-height:400px;
+    overflow:hidden;
+    border-radius:25px;
     background:
-        linear-gradient(
-            90deg,
-            #8b2cff,
-            #00bfff
-        );
-
+    linear-gradient(
+        120deg,
+        #12001d,
+        #020006
+    );
+    border:1px solid rgba(180,70,255,.4);
     box-shadow:
-        0 0 30px
-        rgba(120,60,255,.5);
+    0 0 60px rgba(140,30,255,.25);
+}
 
+/* LIGHT */
+
+.light{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:#8d20ff;
+    filter:blur(100px);
+    opacity:.25;
+    left:20%;
+    top:10%;
+}
+
+/* FLOOR */
+
+.floor{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:28%;
+    background:
+    linear-gradient(
+        180deg,
+        #16001f,
+        #020003
+    );
+}
+
+/* SUBJECT */
+
+.subject{
+    position:absolute;
+    width:70px;
+    height:130px;
+    left:8%;
+    bottom:23%;
     transition:.3s;
 }
 
+.head{
+    width:45px;
+    height:45px;
+    margin:auto;
+    border-radius:50%;
+    background:#d99070;
+    box-shadow:0 0 20px rgba(255,160,100,.4);
+}
 
-.start-game:hover {
+.body{
+    width:70px;
+    height:85px;
+    margin:auto;
+    margin-top:3px;
+    border-radius:30px 30px 10px 10px;
+    background:linear-gradient(#9b35ff,#3b0878);
+    box-shadow:0 0 30px rgba(170,50,255,.5);
+}
 
-    transform:scale(1.05);
+/* WALK */
 
-    box-shadow:
-        0 0 45px
-        rgba(0,200,255,.6);
-}  
+.walk{
+    animation:walk 7s linear infinite;
+}
 
-    </style>
+@keyframes walk{
+
+    0%{left:5%}
+    50%{left:80%}
+    100%{left:5%}
+
+}
+
+/* CAMERA */
+
+.camera-info{
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index:5;
+}
+
+.camera-name{
+    font-size:12px;
+    letter-spacing:3px;
+    color:#00eaff;
+}
+
+.camera-type{
+    font-size:9px;
+    color:#888;
+    margin-top:5px;
+}
+
+/* TARGET */
+
+.target-box{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:10;
+    text-align:center;
+}
+
+.target-label{
+    font-size:9px;
+    color:#888;
+    letter-spacing:3px;
+}
+
+.target{
+    margin-top:6px;
+    font-size:20px;
+    color:#fff;
+    text-shadow:0 0 20px #00eaff;
+}
+
+.signal{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:20;
+    pointer-events:none;
+}
+
+.signal-text{
+    padding:15px 30px;
+    border-radius:50px;
+    background:rgba(0,255,200,.12);
+    border:1px solid #00ffc8;
+    color:#00ffc8;
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:3px;
+    box-shadow:0 0 40px rgba(0,255,200,.5);
+}
+
+/* CONTROLS */
+
+.controls{
+    height:90px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.control{
+    min-width:90px;
+    padding:13px 15px;
+    border-radius:50px;
+    border:1px solid rgba(180,70,255,.4);
+    background:rgba(100,20,180,.12);
+    color:white;
+    cursor:pointer;
+    font-size:9px;
+    letter-spacing:1px;
+    transition:.2s;
+}
+
+.control:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(170,50,255,.6);
+}
+
+.correct{
+    background:#00b894 !important;
+    box-shadow:0 0 35px #00ffc8 !important;
+}
+
+.wrong{
+    background:#d40058 !important;
+    box-shadow:0 0 35px #ff006a !important;
+}
+
+/* MESSAGE */
+
+#message{
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    z-index:100;
+    display:none;
+    text-align:center;
+    pointer-events:none;
+}
+
+.message-main{
+    font-size:35px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.message-sub{
+    margin-top:10px;
+    color:#00eaff;
+}
+
+/* RESULT */
+
+#result{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+    radial-gradient(circle,#30005a,#020003 65%);
+}
+
+.result-box{
+    width:90%;
+    max-width:600px;
+    padding:40px;
+    border-radius:30px;
+    border:1px solid rgba(200,80,255,.5);
+    background:rgba(10,0,20,.85);
+    box-shadow:0 0 70px rgba(150,30,255,.4);
+}
+
+.result-box h1{
+    font-size:clamp(35px,8vw,70px);
+    background:linear-gradient(90deg,#fff,#d65cff,#00eaff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.final-score{
+    font-size:50px;
+    margin:20px;
+    color:#00eaff;
+}
+
+.rank{
+    color:#ffcf4a;
+    letter-spacing:5px;
+}
+
+.play-again{
+    margin-top:30px;
+    padding:14px 30px;
+    border:0;
+    border-radius:50px;
+    background:linear-gradient(90deg,#8b2cff,#00bfff);
+    color:white;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+
+    .stats{
+        gap:8px;
+        font-size:9px;
+    }
+
+    .cinema{
+        height:calc(100vh - 205px);
+        min-height:350px;
+    }
+
+    .controls{
+        height:105px;
+    }
+
+    .control{
+        min-width:75px;
+        padding:11px 8px;
+        font-size:8px;
+    }
+
+}
+
+</style>
 </head>
-
 
 <body>
 
-    <div id="tutorial">
+<!-- INTRO -->
 
-    <div class="tutorial-box">
+<div id="intro">
 
-        <div class="tutorial-tag">
-            YONAS ARCADE
-        </div>
+    <div class="intro-box">
 
-        <h1>
-            🎬 DIRECTOR MODE
-        </h1>
-
-        <p class="tutorial-sub">
-            CREATE THE PERFECT SHOT
-        </p>
-
-        <div class="tutorial-content">
-
-            <p>🎯 <b>MISSION</b></p>
-
-            <p>
-                Screen மேல காட்டப்படும்
-                <strong>TARGET SHOT</strong>-ஐ
-                சரியான நேரத்தில் select பண்ணு.
-            </p>
-
-            <p>🎥 <b>CONTROLS</b></p>
-
-            <div class="tutorial-buttons">
-
-                <span>CAM 01</span>
-                <span>CAM 02</span>
-                <span>CAM 03</span>
-                <span>ZOOM</span>
-                <span>SLOW MO</span>
-
-            </div>
-
-            <p>⚡ <b>SCORING</b></p>
-
-            <p>
-                Correct shot → <strong>+100</strong><br>
-                Combo → <strong>Bonus Score</strong><br>
-                Wrong shot → <strong>-50</strong>
-            </p>
-
-            <p>
-                ⏱️ <strong>30 seconds</strong>
-                உள்ளே அதிக score எடு!
-            </p>
-
-        </div>
-
-        <button
-            class="start-game"
-            onclick="startGame()">
-
-            START MISSION 🚀
-
-        </button>
-
-    </div>
-
-    </div>
-
-    <div class="game">
-
-        <div class="title">
+        <div class="small-title">
             YONAS NICKEE PRESENTS
         </div>
 
@@ -568,95 +428,194 @@
             DIRECTOR MODE
         </h1>
 
-        <div class="subtitle">
-            Create the perfect shot.
+        <p>
+            DON'T JUST WATCH THE SCENE.
+            <br>
+            DIRECT IT.
+        </p>
+
+        <button class="start" onclick="startGame()">
+            START MISSION 🎬
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- GAME -->
+
+<div id="game">
+
+    <div class="top">
+
+        <div class="logo">
+            YONAS // DIRECTOR
         </div>
 
+        <div class="stats">
 
-        <div class="scene">
-
-            <div class="camera-label"
-                 id="cameraLabel">
-
-                CAM 01 • WIDE SHOT
-
+            <div>
+                TIME
+                <span id="time">30</span>
             </div>
 
+            <div>
+                SCORE
+                <span id="score">0</span>
+            </div>
 
-            <div class="subject"></div>
-
-        </div>
-
-        <div id="mission">
-    TARGET:
-    <span id="target">
-        CAM 01
-    </span>
-</div>
-
-<div id="timer">
-    30
-</div>
-
-<div id="combo">
-    COMBO ×0
-</div>
-
-
-        <div class="score">
-            
-
-            SCORE:
-            <span id="score">
-                0
-            </span>
-
-        </div>
-
-
-        <div class="controls">
-
-            <button onclick="cameraOne()">
-                CAM 01
-            </button>
-
-            <button onclick="cameraTwo()">
-                CAM 02
-            </button>
-
-            <button onclick="cameraThree()">
-                CAM 03
-            </button>
-
-            <button onclick="zoomShot()">
-                ZOOM
-            </button>
-
-            <button onclick="slowMotion()">
-                SLOW MO
-            </button>
+            <div>
+                COMBO
+                <span id="combo">0</span>
+            </div>
 
         </div>
 
     </div>
 
 
-    <script>
+    <div class="cinema">
 
-        function startGame() {
+        <div class="light"></div>
 
-    document.getElementById("tutorial")
-        .style.display = "none";
+        <div class="floor"></div>
 
-        }
+        <div class="camera-info">
 
-        let score = 0;
+            <div class="camera-name" id="camera">
+                CAM 01
+            </div>
 
-        let time = 30;
+            <div class="camera-type" id="cameraType">
+                WIDE SHOT
+            </div>
+
+        </div>
+
+
+        <div class="target-box">
+
+            <div class="target-label">
+                NEXT SHOT
+            </div>
+
+            <div class="target" id="target">
+                CAM 02
+            </div>
+
+        </div>
+
+
+        <div class="subject walk" id="subject">
+
+            <div class="head"></div>
+
+            <div class="body"></div>
+
+        </div>
+
+
+        <div class="signal" id="signal">
+
+            <div class="signal-text">
+                SWITCH NOW!
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="controls">
+
+        <button class="control" onclick="choose('CAM 01',this)">
+            CAM 01
+        </button>
+
+        <button class="control" onclick="choose('CAM 02',this)">
+            CAM 02
+        </button>
+
+        <button class="control" onclick="choose('CAM 03',this)">
+            CAM 03
+        </button>
+
+        <button class="control" onclick="choose('ZOOM',this)">
+            ZOOM
+        </button>
+
+        <button class="control" onclick="choose('SLOW MO',this)">
+            SLOW MO
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MESSAGE -->
+
+<div id="message">
+
+    <div class="message-main" id="messageMain">
+        PERFECT CUT!
+    </div>
+
+    <div class="message-sub" id="messageSub">
+        +500
+    </div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div id="result">
+
+    <div class="result-box">
+
+        <div class="small-title">
+            MISSION COMPLETE
+        </div>
+
+        <h1>
+            YOUR CUT
+        </h1>
+
+        <div class="final-score" id="finalScore">
+            0
+        </div>
+
+        <div class="rank" id="rank">
+            ROOKIE DIRECTOR
+        </div>
+
+        <button class="play-again" onclick="location.reload()">
+            PLAY AGAIN 🎬
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let score = 0;
+
+let time = 30;
 
 let combo = 0;
 
-let target = "CAM 01";
+let playing = false;
+
+let target = "CAM 02";
+
+let timer;
+
+
+/* SHOTS */
 
 const shots = [
     "CAM 01",
@@ -667,89 +626,287 @@ const shots = [
 ];
 
 
-function newTarget() {
+/* CAMERA DATA */
 
-    target =
-        shots[
-            Math.floor(
-                Math.random() * shots.length
-            )
-        ];
+const cameraData = {
 
-    document.getElementById("target")
-        .textContent = target;
+    "CAM 01":{
+        name:"CAM 01",
+        type:"WIDE SHOT"
+    },
+
+    "CAM 02":{
+        name:"CAM 02",
+        type:"CLOSE UP"
+    },
+
+    "CAM 03":{
+        name:"CAM 03",
+        type:"SIDE ANGLE"
+    },
+
+    "ZOOM":{
+        name:"ZOOM",
+        type:"CINEMATIC ZOOM"
+    },
+
+    "SLOW MO":{
+        name:"SLOW MO",
+        type:"SLOW MOTION"
+
+    }
+
+};
+
+
+/* START */
+
+function startGame(){
+
+    document.getElementById("intro")
+        .style.display="none";
+
+    document.getElementById("game")
+        .style.display="block";
+
+    playing=true;
+
+    score=0;
+
+    time=30;
+
+    combo=0;
+
+    document.getElementById("score")
+        .textContent=score;
+
+    document.getElementById("time")
+        .textContent=time;
+
+    document.getElementById("combo")
+        .textContent=combo;
+
+    newTarget();
+
+    timer=setInterval(countDown,1000);
 
 }
 
 
-function chooseShot(shot) {
+/* TIMER */
 
-    if (time <= 0) return;
+function countDown(){
 
+    if(!playing) return;
 
-    if (shot === target) {
+    time--;
 
-        combo++;
+    document.getElementById("time")
+        .textContent=time;
 
-        let points =
-            100 + (combo * 25);
+    if(time<=0){
 
-        addScore(points);
-
-        document.getElementById("combo")
-            .textContent =
-            "COMBO ×" + combo;
-
-    } else {
-
-        combo = 0;
-
-        addScore(-50);
-
-        document.getElementById("combo")
-            .textContent =
-            "WRONG SHOT";
+        endGame();
 
     }
 
+}
+
+
+/* TARGET */
+
+function newTarget(){
+
+    target=
+        shots[
+            Math.floor(
+                Math.random()*shots.length
+            )
+        ];
+
+    document.getElementById("target")
+        .textContent=target;
+
+}
+
+
+/* CHOOSE */
+
+function choose(shot,button){
+
+    if(!playing) return;
+
+    if(shot===target){
+
+        combo++;
+
+        let points=500+(combo*100);
+
+        score+=points;
+
+        button.classList.add("correct");
+
+        showMessage(
+            "PERFECT CUT!",
+            "+"+points
+        );
+
+        cameraChange(shot);
+
+        setTimeout(function(){
+
+            button.classList.remove("correct");
+
+        },400);
+
+    }else{
+
+        combo=0;
+
+        score-=100;
+
+        if(score<0) score=0;
+
+        button.classList.add("wrong");
+
+        showMessage(
+            "MISSED!",
+            "-100"
+        );
+
+        setTimeout(function(){
+
+            button.classList.remove("wrong");
+
+        },400);
+
+    }
+
+    document.getElementById("score")
+        .textContent=score;
+
+    document.getElementById("combo")
+        .textContent=combo;
 
     newTarget();
 
 }
 
 
-        function addScore(points) {
+/* CAMERA */
 
-            score += points;
+function cameraChange(shot){
 
-            document.getElementById("score")
-                .textContent = score;
+    let data=cameraData[shot];
 
-        }
+    document.getElementById("camera")
+        .textContent=data.name;
+
+    document.getElementById("cameraType")
+        .textContent=data.type;
 
 
-        function cameraOne() {
-    chooseShot("CAM 01");
+    let subject=
+        document.getElementById("subject");
+
+
+    if(shot==="ZOOM"){
+
+        subject.style.transform="scale(2)";
+
+        setTimeout(function(){
+
+            subject.style.transform="scale(1)";
+
+        },700);
+
+    }
+
+
+    if(shot==="SLOW MO"){
+
+        subject.style.animationDuration="16s";
+
+        setTimeout(function(){
+
+            subject.style.animationDuration="7s";
+
+        },1200);
+
+    }
+
 }
 
-function cameraTwo() {
-    chooseShot("CAM 02");
+
+/* MESSAGE */
+
+function showMessage(main,sub){
+
+    document.getElementById("messageMain")
+        .textContent=main;
+
+    document.getElementById("messageSub")
+        .textContent=sub;
+
+    let box=
+        document.getElementById("message");
+
+    box.style.display="block";
+
+    setTimeout(function(){
+
+        box.style.display="none";
+
+    },600);
+
 }
 
-function cameraThree() {
-    chooseShot("CAM 03");
+
+/* END */
+
+function endGame(){
+
+    playing=false;
+
+    clearInterval(timer);
+
+    document.getElementById("game")
+        .style.display="none";
+
+    document.getElementById("result")
+        .style.display="flex";
+
+    document.getElementById("finalScore")
+        .textContent=score;
+
+
+    let rank="ROOKIE DIRECTOR";
+
+    if(score>=8000){
+
+        rank="MASTER DIRECTOR ★★★★★";
+
+    }else if(score>=5000){
+
+        rank="PRO DIRECTOR ★★★★";
+
+    }else if(score>=2500){
+
+        rank="RISING DIRECTOR ★★★";
+
+    }else if(score>=1000){
+
+        rank="ASSISTANT DIRECTOR ★★";
+
+    }
+
+
+    document.getElementById("rank")
+        .textContent=rank;
+
 }
 
-function zoomShot() {
-    chooseShot("ZOOM");
-}
-
-function slowMotion() {
-    chooseShot("SLOW MO");
-}
-
-    </script>
+</script>
 
 </body>
-
 </html>
