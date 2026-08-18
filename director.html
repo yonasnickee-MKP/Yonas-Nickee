@@ -230,6 +230,52 @@
                 translateY(-3px);
         }
 
+        #mission {
+
+    margin-top:20px;
+
+    color:#aaa;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+}
+
+#target {
+
+    color:#00eaff;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 15px #00eaff;
+}
+
+#timer {
+
+    margin-top:10px;
+
+    font-family:monospace;
+
+    font-size:28px;
+
+    color:#ff4bd8;
+
+    text-shadow:
+        0 0 20px #ff00c8;
+}
+
+#combo {
+
+    margin-top:8px;
+
+    color:#b85cff;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
     </style>
 </head>
 
@@ -265,8 +311,24 @@
 
         </div>
 
+        <div id="mission">
+    TARGET:
+    <span id="target">
+        CAM 01
+    </span>
+</div>
+
+<div id="timer">
+    30
+</div>
+
+<div id="combo">
+    COMBO ×0
+</div>
+
 
         <div class="score">
+            
 
             SCORE:
             <span id="score">
@@ -307,6 +369,71 @@
 
         let score = 0;
 
+        let time = 30;
+
+let combo = 0;
+
+let target = "CAM 01";
+
+const shots = [
+    "CAM 01",
+    "CAM 02",
+    "CAM 03",
+    "ZOOM",
+    "SLOW MO"
+];
+
+
+function newTarget() {
+
+    target =
+        shots[
+            Math.floor(
+                Math.random() * shots.length
+            )
+        ];
+
+    document.getElementById("target")
+        .textContent = target;
+
+}
+
+
+function chooseShot(shot) {
+
+    if (time <= 0) return;
+
+
+    if (shot === target) {
+
+        combo++;
+
+        let points =
+            100 + (combo * 25);
+
+        addScore(points);
+
+        document.getElementById("combo")
+            .textContent =
+            "COMBO ×" + combo;
+
+    } else {
+
+        combo = 0;
+
+        addScore(-50);
+
+        document.getElementById("combo")
+            .textContent =
+            "WRONG SHOT";
+
+    }
+
+
+    newTarget();
+
+}
+
 
         function addScore(points) {
 
@@ -319,58 +446,24 @@
 
 
         function cameraOne() {
+    chooseShot("CAM 01");
+}
 
-            document.getElementById("cameraLabel")
-                .textContent =
-                "CAM 01 • WIDE SHOT";
+function cameraTwo() {
+    chooseShot("CAM 02");
+}
 
-            addScore(100);
+function cameraThree() {
+    chooseShot("CAM 03");
+}
 
-        }
+function zoomShot() {
+    chooseShot("ZOOM");
+}
 
-
-        function cameraTwo() {
-
-            document.getElementById("cameraLabel")
-                .textContent =
-                "CAM 02 • CLOSE UP";
-
-            addScore(100);
-
-        }
-
-
-        function cameraThree() {
-
-            document.getElementById("cameraLabel")
-                .textContent =
-                "CAM 03 • SIDE ANGLE";
-
-            addScore(100);
-
-        }
-
-
-        function zoomShot() {
-
-            document.getElementById("cameraLabel")
-                .textContent =
-                "CINEMATIC ZOOM";
-
-            addScore(150);
-
-        }
-
-
-        function slowMotion() {
-
-            document.getElementById("cameraLabel")
-                .textContent =
-                "SLOW MOTION";
-
-            addScore(200);
-
-        }
+function slowMotion() {
+    chooseShot("SLOW MO");
+}
 
     </script>
 
