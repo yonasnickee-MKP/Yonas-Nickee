@@ -1,1649 +1,1200 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
-
-<title>Yonas Nickee — Director Mode</title>
+<title>Yonas Nickee — Director Challenge</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
-    width:100%;
-    height:100%;
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#020006;
+  color:#fff;
 }
 
-body{
-
-    background:#020006;
-
-    color:#fff;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    overflow:hidden;
+button{
+  font-family:inherit;
 }
 
+/* ================= INTRO ================= */
 
-/* =====================================================
-   BACKGROUND
-===================================================== */
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    left:50%;
-    top:35%;
-
-    transform:translate(-50%,-50%);
-
-    background:#6c00ff;
-
-    filter:blur(180px);
-
-    opacity:.12;
-
-    pointer-events:none;
+.screen{
+  position:fixed;
+  inset:0;
 }
-
-
-/* =====================================================
-   INTRO / TUTORIAL
-===================================================== */
 
 #intro{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9999;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-
-        radial-gradient(
-            circle at center,
-            #32005c 0%,
-            #09000f 45%,
-            #020006 100%
-        );
-
-    overflow:auto;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  overflow:auto;
+  background:
+    radial-gradient(circle at 50% 35%,#4b0080 0%,#12001e 38%,#020006 78%);
 }
 
-
-.intro-box{
-
-    width:100%;
-
-    max-width:620px;
-
-    padding:35px 25px;
-
-    text-align:center;
-
-    border-radius:28px;
-
-    background:
-        rgba(10,0,20,.88);
-
-    border:
-        1px solid
-        rgba(180,80,255,.45);
-
-    box-shadow:
-        0 0 70px
-        rgba(140,30,255,.3);
-
-    backdrop-filter:blur(15px);
-
-    animation:
-        introIn .8s ease;
+.intro-card{
+  width:100%;
+  max-width:650px;
+  padding:28px 22px;
+  text-align:center;
+  border:1px solid rgba(200,80,255,.4);
+  border-radius:28px;
+  background:rgba(7,0,15,.9);
+  box-shadow:0 0 80px rgba(150,40,255,.3);
 }
-
-
-@keyframes introIn{
-
-    from{
-        opacity:0;
-        transform:scale(.9);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
-}
-
 
 .brand{
-
-    font-size:9px;
-
-    letter-spacing:5px;
-
-    color:#00eaff;
-
-    margin-bottom:15px;
+  color:#00eaff;
+  font-size:9px;
+  letter-spacing:5px;
+  margin-bottom:12px;
 }
 
-
-.intro-box h1{
-
-    font-size:
-        clamp(40px,11vw,80px);
-
-    line-height:.95;
-
-    letter-spacing:4px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #d15cff,
-            #00eaff
-        );
-
-    -webkit-background-clip:text;
-
-    background-clip:text;
-
-    color:transparent;
+.intro-card h1{
+  font-size:clamp(42px,12vw,82px);
+  line-height:.9;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,#fff,#d04cff,#00eaff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-
-.tagline{
-
-    margin-top:15px;
-
-    color:#999;
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-    line-height:1.7;
+.intro-card p{
+  color:#999;
+  font-size:10px;
+  letter-spacing:3px;
+  line-height:1.7;
+  margin-top:15px;
 }
 
-
-/* =====================================================
-   HOW TO PLAY
-===================================================== */
-
-.tutorial{
-
-    margin-top:25px;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    text-align:left;
-
-    background:
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
+.start-btn,
+.big-btn{
+  width:100%;
+  border:0;
+  border-radius:50px;
+  padding:15px;
+  margin-top:22px;
+  color:#fff;
+  font-weight:bold;
+  font-size:10px;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#7625ff,#c02cff,#00bfff);
+  box-shadow:0 0 30px rgba(130,40,255,.4);
 }
 
-
-.tutorial-title{
-
-    color:#00eaff;
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-    margin-bottom:15px;
-
-    text-align:center;
+.how{
+  margin-top:20px;
+  padding:16px;
+  text-align:left;
+  border-radius:18px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
 }
 
-
-.step{
-
-    display:flex;
-
-    gap:12px;
-
-    align-items:flex-start;
-
-    margin:13px 0;
-
-    color:#aaa;
-
-    font-size:12px;
-
-    line-height:1.5;
+.how-title{
+  text-align:center;
+  color:#00eaff;
+  font-size:10px;
+  letter-spacing:3px;
+  margin-bottom:12px;
 }
 
-
-.step-number{
-
-    min-width:28px;
-
-    height:28px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(130,30,255,.2);
-
-    border:
-        1px solid
-        rgba(180,70,255,.4);
-
-    color:#fff;
-
-    font-size:10px;
+.how div{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.5;
+  margin:9px 0;
 }
 
-
-.step strong{
-
-    color:#fff;
+.how b{
+  color:#fff;
 }
 
+/* ================= STAGE SELECT ================= */
 
-.highlight{
-
-    color:#00eaff;
-
-    font-weight:bold;
+#stages{
+  z-index:900;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  overflow:auto;
+  background:
+    radial-gradient(circle at 50% 30%,#30005a,#020006 70%);
 }
 
-
-.start-button{
-
-    width:100%;
-
-    margin-top:25px;
-
-    padding:17px;
-
-    border:0;
-
-    border-radius:50px;
-
-    color:#fff;
-
-    font-weight:bold;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    cursor:pointer;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #7925ff,
-            #b82cff,
-            #00bfff
-        );
-
-    box-shadow:
-        0 0 35px
-        rgba(130,40,255,.4);
-
-    transition:.25s;
+.stage-card{
+  width:100%;
+  max-width:800px;
+  padding:22px;
+  border-radius:25px;
+  background:rgba(8,0,16,.92);
+  border:1px solid rgba(190,70,255,.35);
+  box-shadow:0 0 70px rgba(130,30,255,.25);
 }
 
-
-.start-button:active{
-
-    transform:scale(.96);
-
+.stage-title{
+  text-align:center;
+  color:#00eaff;
+  font-size:9px;
+  letter-spacing:5px;
+  margin-bottom:8px;
 }
 
+.stage-card h2{
+  text-align:center;
+  font-size:clamp(28px,7vw,48px);
+}
 
-/* =====================================================
-   GAME
-===================================================== */
+.stage-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:20px;
+}
+
+.stage{
+  min-height:110px;
+  padding:12px;
+  border-radius:18px;
+  border:1px solid rgba(180,70,255,.35);
+  background:rgba(100,20,180,.1);
+  color:#fff;
+  text-align:center;
+  cursor:pointer;
+}
+
+.stage strong{
+  display:block;
+  color:#00eaff;
+  font-size:10px;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+
+.stage span{
+  color:#888;
+  font-size:8px;
+  line-height:1.5;
+}
+
+.stage.locked{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+.stage.final{
+  grid-column:1/-1;
+  border-color:#ffd45c;
+  color:#ffd45c;
+}
+
+/* ================= GAME ================= */
 
 #game{
-
-    display:none;
-
-    width:100%;
-
-    height:100dvh;
-
-    padding:
-        8px;
-
-    position:relative;
+  z-index:100;
+  display:none;
+  height:100dvh;
+  padding:8px;
 }
-
-
-/* =====================================================
-   TOP BAR
-===================================================== */
 
 .topbar{
-
-    width:100%;
-
-    height:48px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:
-        0 8px;
+  height:47px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7px;
 }
-
 
 .logo{
-
-    color:#00eaff;
-
-    font-size:9px;
-
-    letter-spacing:3px;
+  color:#00eaff;
+  font-size:8px;
+  letter-spacing:3px;
 }
-
 
 .stats{
-
-    display:flex;
-
-    gap:14px;
-
-    font-size:8px;
-
-    color:#777;
+  display:flex;
+  gap:12px;
 }
-
 
 .stat{
-
-    text-align:center;
+  color:#777;
+  text-align:center;
+  font-size:7px;
 }
 
-
-.stat-value{
-
-    display:block;
-
-    color:#fff;
-
-    font-size:11px;
-
-    margin-top:3px;
+.stat b{
+  display:block;
+  color:#fff;
+  font-size:11px;
+  margin-top:3px;
 }
 
-
-/* =====================================================
-   CINEMA AREA
-===================================================== */
+/* ================= CINEMA ================= */
 
 .cinema{
-
-    position:relative;
-
-    width:100%;
-
-    height:
-        calc(100dvh - 170px);
-
-    min-height:300px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    background:
-
-        radial-gradient(
-            circle at 40% 30%,
-            #260044,
-            #08000d 55%,
-            #020006 100%
-        );
-
-    border:
-        1px solid
-        rgba(180,70,255,.45);
-
-    box-shadow:
-        0 0 50px
-        rgba(130,30,255,.2);
+  position:relative;
+  height:calc(100dvh - 170px);
+  min-height:300px;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(180,70,255,.45);
+  background:
+    radial-gradient(circle at 35% 25%,#350050,#0b0013 48%,#020006 100%);
+  box-shadow:0 0 60px rgba(130,30,255,.2);
+  transition:.2s;
 }
 
-
-/* =====================================================
-   LIGHT
-===================================================== */
-
-.light-one{
-
-    position:absolute;
-
-    width:250px;
-
-    height:250px;
-
-    border-radius:50%;
-
-    background:#8d20ff;
-
-    filter:blur(100px);
-
-    opacity:.2;
-
-    left:10%;
-
-    top:10%;
+.sky{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 70% 25%,rgba(0,220,255,.15),transparent 30%);
 }
 
-
-.light-two{
-
-    position:absolute;
-
-    width:200px;
-
-    height:200px;
-
-    border-radius:50%;
-
-    background:#00bfff;
-
-    filter:blur(100px);
-
-    opacity:.1;
-
-    right:5%;
-
-    bottom:20%;
+.neon{
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  filter:blur(80px);
+  background:#9d20ff;
+  opacity:.2;
+  left:10%;
+  top:10%;
 }
 
+.neon2{
+  position:absolute;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  filter:blur(80px);
+  background:#00cfff;
+  opacity:.12;
+  right:5%;
+  bottom:20%;
+}
 
-/* =====================================================
-   FLOOR
-===================================================== */
+.building{
+  position:absolute;
+  bottom:22%;
+  width:80px;
+  height:45%;
+  background:linear-gradient(90deg,#050008,#170020);
+  border:1px solid rgba(200,50,255,.15);
+}
+
+.b1{left:5%}
+.b2{left:30%;height:55%}
+.b3{right:25%;height:48%}
+.b4{right:4%;height:60%}
+
+.window{
+  position:absolute;
+  width:7px;
+  height:12px;
+  background:#00eaff;
+  box-shadow:0 0 8px #00eaff;
+  opacity:.6;
+}
+
+.w1{left:20%;top:20%}
+.w2{left:55%;top:38%}
+.w3{left:25%;top:65%}
+.w4{left:70%;top:75%}
 
 .floor{
-
-    position:absolute;
-
-    left:0;
-
-    bottom:0;
-
-    width:100%;
-
-    height:25%;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #170020,
-            #030006
-        );
-
-    border-top:
-        1px solid
-        rgba(180,70,255,.12);
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:25%;
+  background:
+    linear-gradient(180deg,#16001f,#020006);
+  border-top:1px solid rgba(200,70,255,.12);
 }
-
-
-/* =====================================================
-   CAMERA INFO
-===================================================== */
 
 .camera-info{
-
-    position:absolute;
-
-    top:15px;
-
-    left:15px;
-
-    z-index:20;
+  position:absolute;
+  z-index:30;
+  top:12px;
+  left:13px;
 }
-
 
 .camera-name{
-
-    color:#00eaff;
-
-    font-size:10px;
-
-    letter-spacing:3px;
+  color:#00eaff;
+  font-size:9px;
+  letter-spacing:3px;
 }
-
 
 .camera-type{
-
-    color:#777;
-
-    font-size:7px;
-
-    letter-spacing:1px;
-
-    margin-top:5px;
+  color:#777;
+  font-size:7px;
+  margin-top:4px;
 }
-
-
-/* =====================================================
-   TARGET
-===================================================== */
 
 .target-box{
-
-    position:absolute;
-
-    top:14px;
-
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index:30;
-
-    width:150px;
-
-    text-align:center;
-
-    padding:9px;
-
-    border-radius:12px;
-
-    background:
-        rgba(0,0,0,.35);
-
-    border:
-        1px solid
-        rgba(0,234,255,.18);
+  position:absolute;
+  z-index:40;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:150px;
+  text-align:center;
+  padding:8px;
+  border-radius:12px;
+  background:rgba(0,0,0,.4);
+  border:1px solid rgba(0,234,255,.2);
 }
-
 
 .target-label{
-
-    color:#777;
-
-    font-size:7px;
-
-    letter-spacing:3px;
+  color:#777;
+  font-size:6px;
+  letter-spacing:3px;
 }
-
 
 .target{
-
-    color:#fff;
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    margin-top:4px;
-
-    text-shadow:
-        0 0 15px
-        #00eaff;
+  color:#fff;
+  font-size:14px;
+  font-weight:bold;
+  margin-top:3px;
+  text-shadow:0 0 15px #00eaff;
 }
 
-
-/* =====================================================
-   SUBJECT
-===================================================== */
-
-.subject{
-
-    position:absolute;
-
-    width:65px;
-
-    height:125px;
-
-    left:5%;
-
-    bottom:23%;
-
-    z-index:15;
-
-    animation:
-        walk 7s linear infinite;
-
-    transition:
-        transform .4s ease;
+.zone{
+  position:absolute;
+  z-index:5;
+  bottom:23%;
+  left:45%;
+  width:90px;
+  height:130px;
+  border:1px dashed rgba(0,255,200,.3);
+  opacity:.5;
 }
 
+.zone::after{
+  content:"TARGET";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-18px;
+  color:#00ffc8;
+  font-size:6px;
+  letter-spacing:2px;
+}
+
+/* ================= CHARACTER ================= */
+
+.character{
+  position:absolute;
+  z-index:20;
+  width:62px;
+  height:135px;
+  left:4%;
+  bottom:22%;
+  animation:walk 6s linear infinite;
+  transition:transform .35s;
+}
 
 @keyframes walk{
-
-    0%{
-        left:5%;
-    }
-
-    50%{
-        left:80%;
-    }
-
-    100%{
-        left:5%;
-    }
-
+  0%{left:3%}
+  50%{left:82%}
+  100%{left:3%}
 }
 
-
-.head{
-
-    width:40px;
-
-    height:40px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffca9b,
-            #a85c48
-        );
-
-    box-shadow:
-        0 0 18px
-        rgba(255,150,100,.3);
+.char-shadow{
+  position:absolute;
+  bottom:-7px;
+  left:-12px;
+  width:85px;
+  height:13px;
+  border-radius:50%;
+  background:rgba(0,0,0,.7);
+  filter:blur(5px);
 }
 
-
-.body{
-
-    width:65px;
-
-    height:80px;
-
-    margin-top:4px;
-
-    border-radius:
-        28px 28px 10px 10px;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #ad32ff,
-            #430b82
-        );
-
-    box-shadow:
-        0 0 30px
-        rgba(170,50,255,.5);
+.hair{
+  position:absolute;
+  top:0;
+  left:11px;
+  width:40px;
+  height:20px;
+  border-radius:22px 22px 5px 5px;
+  background:#17121d;
+  z-index:2;
 }
 
+.face{
+  position:absolute;
+  top:7px;
+  left:13px;
+  width:36px;
+  height:38px;
+  border-radius:48% 48% 45% 45%;
+  background:linear-gradient(145deg,#ffd0a5,#9e5948);
+}
 
-/* =====================================================
-   SWITCH SIGNAL
-===================================================== */
+.eye{
+  position:absolute;
+  top:22px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#151018;
+}
+
+.eye1{left:21px}
+.eye2{left:34px}
+
+.neck{
+  position:absolute;
+  top:40px;
+  left:25px;
+  width:12px;
+  height:10px;
+  background:#b56a55;
+}
+
+.jacket{
+  position:absolute;
+  top:48px;
+  left:7px;
+  width:49px;
+  height:62px;
+  border-radius:20px 20px 9px 9px;
+  background:linear-gradient(150deg,#bd38ff,#430878);
+  box-shadow:0 0 20px rgba(180,50,255,.35);
+}
+
+.arm{
+  position:absolute;
+  top:51px;
+  width:11px;
+  height:58px;
+  border-radius:10px;
+  background:#7920a8;
+  transform-origin:top center;
+}
+
+.arm1{
+  left:1px;
+  transform:rotate(12deg);
+}
+
+.arm2{
+  right:1px;
+  transform:rotate(-12deg);
+}
+
+.pants{
+  position:absolute;
+  top:106px;
+  left:13px;
+  width:36px;
+  height:22px;
+  background:#16162a;
+  border-radius:5px;
+}
+
+.leg{
+  position:absolute;
+  top:121px;
+  width:12px;
+  height:32px;
+  background:#151525;
+  transform-origin:top;
+}
+
+.leg1{left:15px}
+.leg2{left:35px}
+
+.shoe{
+  position:absolute;
+  top:147px;
+  width:20px;
+  height:7px;
+  border-radius:8px;
+  background:#050507;
+}
+
+.shoe1{left:9px}
+.shoe2{left:31px}
+
+/* ================= WEATHER ================= */
+
+.rain{
+  position:absolute;
+  inset:0;
+  z-index:70;
+  pointer-events:none;
+  opacity:0;
+  transition:.3s;
+  background:
+    repeating-linear-gradient(
+      110deg,
+      transparent 0,
+      transparent 12px,
+      rgba(130,220,255,.2) 13px,
+      transparent 14px
+    );
+  animation:rainMove .35s linear infinite;
+}
+
+@keyframes rainMove{
+  from{background-position:0 0}
+  to{background-position:20px 40px}
+}
+
+.weather-label{
+  position:absolute;
+  right:12px;
+  top:13px;
+  z-index:80;
+  color:#aaa;
+  font-size:7px;
+  letter-spacing:2px;
+}
+
+/* ================= SIGNAL ================= */
 
 .signal{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:50;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    pointer-events:none;
+  position:absolute;
+  z-index:100;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
 }
-
 
 .signal span{
-
-    padding:
-        15px 25px;
-
-    border-radius:50px;
-
-    color:#00ffc8;
-
-    background:
-        rgba(0,255,200,.1);
-
-    border:
-        1px solid
-        #00ffc8;
-
-    box-shadow:
-        0 0 40px
-        rgba(0,255,200,.5);
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
-
-    animation:
-        signalPulse .4s infinite alternate;
+  color:#00ffc8;
+  padding:13px 22px;
+  border:1px solid #00ffc8;
+  border-radius:50px;
+  background:rgba(0,255,200,.1);
+  box-shadow:0 0 35px rgba(0,255,200,.5);
+  font-size:14px;
+  font-weight:bold;
+  letter-spacing:3px;
 }
 
-
-@keyframes signalPulse{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.08);
-    }
-
-}
-
-
-/* =====================================================
-   FEEDBACK
-===================================================== */
-
-.feedback{
-
-    position:fixed;
-
-    left:50%;
-
-    top:48%;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.7);
-
-    z-index:500;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    text-align:center;
-
-    transition:.2s;
-}
-
-
-.feedback.show{
-
-    opacity:1;
-
-    transform:
-        translate(-50%,-50%)
-        scale(1);
-}
-
-
-.feedback-main{
-
-    font-size:
-        clamp(28px,8vw,55px);
-
-    font-weight:bold;
-
-    letter-spacing:3px;
-}
-
-
-.feedback-sub{
-
-    color:#00eaff;
-
-    margin-top:8px;
-
-    font-size:14px;
-}
-
-
-/* =====================================================
-   CONTROLS
-===================================================== */
+/* ================= CONTROLS ================= */
 
 .controls{
-
-    height:105px;
-
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:7px;
-
-    padding:
-        8px 2px 0;
+  height:105px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  padding-top:7px;
 }
-
 
 .control{
-
-    width:100%;
-
-    height:42px;
-
-    border-radius:50px;
-
-    border:
-        1px solid
-        rgba(180,70,255,.45);
-
-    background:
-        rgba(100,20,180,.14);
-
-    color:#fff;
-
-    font-size:8px;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
-
-    transition:.15s;
-
-    box-shadow:
-        inset 0 0 15px
-        rgba(150,40,255,.04);
+  height:42px;
+  border-radius:50px;
+  color:#fff;
+  background:rgba(100,20,180,.12);
+  border:1px solid rgba(180,70,255,.4);
+  font-size:8px;
+  letter-spacing:1px;
 }
-
 
 .control:active{
-
-    transform:
-        scale(.94);
+  transform:scale(.94);
 }
-
 
 .control.correct{
-
-    background:#008f70;
-
-    border-color:#00ffc8;
-
-    box-shadow:
-        0 0 30px
-        rgba(0,255,200,.6);
+  background:#008d70;
+  border-color:#00ffc8;
+  box-shadow:0 0 30px rgba(0,255,200,.6);
 }
-
 
 .control.wrong{
-
-    background:#a00042;
-
-    border-color:#ff2b80;
-
-    box-shadow:
-        0 0 30px
-        rgba(255,0,100,.5);
+  background:#a00042;
+  border-color:#ff2c80;
+  box-shadow:0 0 30px rgba(255,0,100,.6);
 }
 
+/* ================= FEEDBACK ================= */
 
-/* =====================================================
-   RESULT
-===================================================== */
-
-#result{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9000;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    text-align:center;
-
-    background:
-
-        radial-gradient(
-            circle,
-            #35005f,
-            #030006 65%
-        );
+.feedback{
+  position:fixed;
+  z-index:500;
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%) scale(.7);
+  opacity:0;
+  pointer-events:none;
+  text-align:center;
+  transition:.2s;
 }
 
-
-.result-box{
-
-    width:100%;
-
-    max-width:550px;
-
-    padding:40px 25px;
-
-    border-radius:28px;
-
-    background:
-        rgba(10,0,20,.9);
-
-    border:
-        1px solid
-        rgba(180,70,255,.5);
-
-    box-shadow:
-        0 0 70px
-        rgba(140,30,255,.35);
+.feedback.show{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
 }
 
-
-.result-small{
-
-    color:#00eaff;
-
-    font-size:9px;
-
-    letter-spacing:4px;
+.feedback-main{
+  font-size:clamp(28px,8vw,58px);
+  font-weight:bold;
+  letter-spacing:3px;
 }
 
-
-.result-box h1{
-
-    margin-top:15px;
-
-    font-size:
-        clamp(40px,10vw,75px);
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #fff,
-            #d15cff,
-            #00eaff
-        );
-
-    -webkit-background-clip:text;
-
-    background-clip:text;
-
-    color:transparent;
+.feedback-sub{
+  color:#00eaff;
+  margin-top:8px;
+  font-size:14px;
 }
 
+/* ================= STAGE COMPLETE ================= */
 
-.final-score{
-
-    margin:20px 0;
-
-    font-size:
-        clamp(45px,12vw,75px);
-
-    color:#00eaff;
-
-    text-shadow:
-        0 0 25px
-        rgba(0,234,255,.5);
+#complete{
+  z-index:700;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  background:rgba(3,0,8,.95);
 }
 
-
-.rank{
-
-    color:#ffd35a;
-
-    font-size:11px;
-
-    letter-spacing:4px;
+.complete-card{
+  width:100%;
+  max-width:500px;
+  padding:35px 22px;
+  border-radius:25px;
+  border:1px solid rgba(200,80,255,.4);
+  background:#08000f;
+  box-shadow:0 0 70px rgba(140,30,255,.35);
 }
 
-
-.result-buttons{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:30px;
+.complete-card h2{
+  font-size:clamp(30px,8vw,55px);
+  background:linear-gradient(90deg,#fff,#d65cff,#00eaff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-
-.result-button{
-
-    flex:1;
-
-    padding:14px;
-
-    border:0;
-
-    border-radius:50px;
-
-    color:#fff;
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
+.complete-score{
+  color:#00eaff;
+  font-size:45px;
+  margin:15px;
 }
 
-
-.again{
-
-    background:
-        linear-gradient(
-            90deg,
-            #7925ff,
-            #00bfff
-        );
+.stars{
+  color:#ffd45c;
+  letter-spacing:8px;
 }
 
+/* ================= FINAL ================= */
 
-.home{
-
-    background:
-        rgba(255,255,255,.08);
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
+#final{
+  z-index:800;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  background:
+    radial-gradient(circle,#420078,#030006 70%);
 }
 
+.final-card{
+  width:100%;
+  max-width:650px;
+  padding:40px 22px;
+  border-radius:30px;
+  border:1px solid rgba(255,210,80,.4);
+  background:rgba(8,0,16,.9);
+  box-shadow:0 0 100px rgba(180,50,255,.4);
+}
 
-/* =====================================================
-   DESKTOP
-===================================================== */
+.final-small{
+  color:#00eaff;
+  font-size:9px;
+  letter-spacing:5px;
+}
+
+.final-card h1{
+  margin-top:15px;
+  font-size:clamp(38px,10vw,75px);
+  background:linear-gradient(90deg,#fff,#ffd45c,#d65cff,#00eaff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.final-stats{
+  margin-top:20px;
+  color:#aaa;
+  font-size:11px;
+  line-height:2;
+}
+
+.final-stats b{
+  color:#fff;
+}
+
+/* ================= RESPONSIVE ================= */
 
 @media(min-width:700px){
 
-    #game{
+  #game{
+    max-width:1100px;
+    margin:auto;
+    padding:15px;
+  }
 
-        max-width:1100px;
+  .cinema{
+    height:calc(100dvh - 180px);
+  }
 
-        margin:auto;
+  .controls{
+    height:70px;
+    grid-template-columns:repeat(5,1fr);
+  }
 
-        padding:15px;
-    }
-
-    .cinema{
-
-        height:
-            calc(100dvh - 180px);
-    }
-
-    .controls{
-
-        grid-template-columns:
-            repeat(5,1fr);
-
-        height:70px;
-
-        padding-top:10px;
-    }
-
-    .control{
-
-        height:45px;
-    }
+  .control{
+    height:45px;
+  }
 
 }
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
 
 @media(max-width:380px){
 
-    .stats{
+  .stats{
+    gap:7px;
+  }
 
-        gap:7px;
+  .stat{
+    font-size:6px;
+  }
 
-    }
+  .stat b{
+    font-size:9px;
+  }
 
-    .stat{
+  .target-box{
+    width:125px;
+  }
 
-        font-size:6px;
+  .target{
+    font-size:12px;
+  }
 
-    }
+  .stage-grid{
+    gap:6px;
+  }
 
-    .stat-value{
-
-        font-size:9px;
-
-    }
-
-    .target-box{
-
-        width:125px;
-
-    }
-
-    .target{
-
-        font-size:13px;
-
-    }
-
-    .controls{
-
-        gap:5px;
-
-    }
-
-    .control{
-
-        font-size:7px;
-
-    }
+  .stage{
+    min-height:95px;
+  }
 
 }
-
 </style>
-
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      INTRO
 ===================================================== -->
 
-<div id="intro">
+<section id="intro" class="screen">
 
-    <div class="intro-box">
+  <div class="intro-card">
 
-        <div class="brand">
-            YONAS NICKEE PRESENTS
-        </div>
+    <div class="brand">
+      YONAS NICKEE PRESENTS
+    </div>
 
-        <h1>
-            DIRECTOR<br>
-            MODE
-        </h1>
+    <h1>
+      DIRECTOR<br>CHALLENGE
+    </h1>
 
-        <div class="tagline">
+    <p>
+      DON'T JUST WATCH THE MOVIE.<br>
+      DIRECT IT.
+    </p>
 
-            DON'T JUST WATCH THE SCENE.<br>
+    <div class="how">
 
-            <span class="highlight">
-                DIRECT IT.
-            </span>
+      <div class="how-title">
+        HOW TO PLAY
+      </div>
 
-        </div>
+      <div>🎥 <b>1.</b> Watch the moving character.</div>
 
+      <div>🎯 <b>2.</b> Check <b>NEXT SHOT</b>.</div>
 
-        <div class="tutorial">
+      <div>⚡ <b>3.</b> Press the matching camera at the right moment.</div>
 
-            <div class="tutorial-title">
-                HOW TO PLAY
-            </div>
+      <div>🔥 <b>4.</b> Perfect timing gives more points and combo.</div>
 
-
-            <div class="step">
-
-                <div class="step-number">
-                    01
-                </div>
-
-                <div>
-                    Watch the moving character
-                    inside the cinematic scene.
-                </div>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    02
-                </div>
-
-                <div>
-                    Look at
-                    <strong>NEXT SHOT</strong>
-                    at the top.
-                </div>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    03
-                </div>
-
-                <div>
-                    If it says
-                    <span class="highlight">
-                        CAM 02
-                    </span>,
-                    press the
-                    <strong>CAM 02</strong>
-                    button.
-                </div>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    04
-                </div>
-
-                <div>
-                    Correct shot =
-                    <span class="highlight">
-                        PERFECT CUT
-                    </span>
-                    + score + combo.
-                </div>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    05
-                </div>
-
-                <div>
-                    You have
-                    <strong>30 seconds</strong>.
-                    Get the highest score!
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="start-button"
-            onclick="startGame()">
-
-            START MISSION 🎬
-
-        </button>
+      <div>🏆 <b>5.</b> Complete stages to unlock harder missions.</div>
 
     </div>
 
-</div>
+    <button class="start-btn" onclick="openStages()">
+      ENTER DIRECTOR'S JOURNEY 🎬
+    </button>
 
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STAGE SELECT
+===================================================== -->
+
+<section id="stages" class="screen">
+
+  <div class="stage-card">
+
+    <div class="stage-title">
+      DIRECTOR'S JOURNEY
+    </div>
+
+    <h2>SELECT MISSION</h2>
+
+    <div class="stage-grid">
+
+      <button class="stage" id="stage1" onclick="startStage(1)">
+        <strong>STAGE 01</strong>
+        <span>NEON ENTRY<br>BEGINNER</span>
+      </button>
+
+      <button class="stage locked" id="stage2" onclick="startStage(2)">
+        <strong>STAGE 02</strong>
+        <span>FAST CUT<br>LOCKED</span>
+      </button>
+
+      <button class="stage locked" id="stage3" onclick="startStage(3)">
+        <strong>STAGE 03</strong>
+        <span>MEMORY SHOT<br>LOCKED</span>
+      </button>
+
+      <button class="stage locked" id="stage4" onclick="startStage(4)">
+        <strong>STAGE 04</strong>
+        <span>BOSS SCENE<br>LOCKED</span>
+      </button>
+
+      <button class="stage final locked" id="stage5" onclick="startStage(5)">
+        <strong>FINAL — YONAS MODE 👑</strong>
+        <span>MASTER OF THE CUT</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 <!-- =====================================================
      GAME
 ===================================================== -->
 
-<div id="game">
+<section id="game">
+
+  <div class="topbar">
+
+    <div class="logo">
+      YONAS // DIRECTOR
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        TIME
+        <b id="time">30</b>
+      </div>
+
+      <div class="stat">
+        SCORE
+        <b id="score">0</b>
+      </div>
+
+      <div class="stat">
+        COMBO
+        <b id="combo">0</b>
+      </div>
+
+      <div class="stat">
+        STAGE
+        <b id="stageNo">01</b>
+      </div>
+
+    </div>
+
+  </div>
 
 
-    <div class="topbar">
+  <div class="cinema" id="cinema">
 
-        <div class="logo">
-            YONAS // DIRECTOR
-        </div>
+    <div class="sky"></div>
 
+    <div class="neon"></div>
 
-        <div class="stats">
+    <div class="neon2"></div>
 
-            <div class="stat">
+    <div class="building b1">
+      <i class="window w1"></i>
+      <i class="window w3"></i>
+    </div>
 
-                TIME
+    <div class="building b2">
+      <i class="window w2"></i>
+    </div>
 
-                <span
-                    class="stat-value"
-                    id="time">
+    <div class="building b3">
+      <i class="window w4"></i>
+    </div>
 
-                    30
+    <div class="building b4">
+      <i class="window w1"></i>
+      <i class="window w2"></i>
+    </div>
 
-                </span>
+    <div class="floor"></div>
 
-            </div>
+    <div class="rain" id="rain"></div>
 
-
-            <div class="stat">
-
-                SCORE
-
-                <span
-                    class="stat-value"
-                    id="score">
-
-                    0
-
-                </span>
-
-            </div>
+    <div class="weather-label" id="weather">
+      CLEAR
+    </div>
 
 
-            <div class="stat">
+    <div class="camera-info">
 
-                COMBO
+      <div class="camera-name" id="cameraName">
+        CAM 01
+      </div>
 
-                <span
-                    class="stat-value"
-                    id="combo">
-
-                    0
-
-                </span>
-
-            </div>
-
-        </div>
+      <div class="camera-type" id="cameraType">
+        WIDE SHOT
+      </div>
 
     </div>
 
 
+    <div class="target-box">
 
-    <!-- CINEMA -->
+      <div class="target-label">
+        NEXT SHOT
+      </div>
 
-    <div class="cinema">
-
-
-        <div class="light-one"></div>
-
-        <div class="light-two"></div>
-
-        <div class="floor"></div>
-
-
-        <!-- CURRENT CAMERA -->
-
-        <div class="camera-info">
-
-            <div
-                class="camera-name"
-                id="cameraName">
-
-                CAM 01
-
-            </div>
-
-            <div
-                class="camera-type"
-                id="cameraType">
-
-                WIDE SHOT
-
-            </div>
-
-        </div>
-
-
-        <!-- TARGET -->
-
-        <div class="target-box">
-
-            <div class="target-label">
-
-                NEXT SHOT
-
-            </div>
-
-            <div
-                class="target"
-                id="target">
-
-                CAM 01
-
-            </div>
-
-        </div>
-
-
-        <!-- CHARACTER -->
-
-        <div
-            class="subject"
-            id="subject">
-
-            <div class="head"></div>
-
-            <div class="body"></div>
-
-        </div>
-
-
-        <!-- SIGNAL -->
-
-        <div
-            class="signal"
-            id="signal">
-
-            <span>
-                SWITCH NOW!
-            </span>
-
-        </div>
+      <div class="target" id="target">
+        CAM 01
+      </div>
 
     </div>
 
 
-
-    <!-- CONTROLS -->
-
-    <div class="controls">
+    <div class="zone"></div>
 
 
-        <button
-            class="control"
-            onclick="chooseShot('CAM 01',this)">
+    <!-- CHARACTER -->
 
-            CAM 01
+    <div class="character" id="character">
 
-        </button>
+      <div class="hair"></div>
 
+      <div class="face">
 
-        <button
-            class="control"
-            onclick="chooseShot('CAM 02',this)">
+        <i class="eye eye1"></i>
+        <i class="eye eye2"></i>
 
-            CAM 02
+      </div>
 
-        </button>
+      <div class="neck"></div>
 
+      <div class="jacket"></div>
 
-        <button
-            class="control"
-            onclick="chooseShot('CAM 03',this)">
+      <div class="arm arm1"></div>
 
-            CAM 03
+      <div class="arm arm2"></div>
 
-        </button>
+      <div class="pants"></div>
 
+      <div class="leg leg1"></div>
 
-        <button
-            class="control"
-            onclick="chooseShot('ZOOM',this)">
+      <div class="leg leg2"></div>
 
-            ZOOM
+      <div class="shoe shoe1"></div>
 
-        </button>
+      <div class="shoe shoe2"></div>
 
-
-        <button
-            class="control"
-            onclick="chooseShot('SLOW MO',this)">
-
-            SLOW MO
-
-        </button>
-
+      <div class="char-shadow"></div>
 
     </div>
 
-</div>
 
+    <div class="signal" id="signal">
+
+      <span>
+        SWITCH NOW!
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="controls">
+
+    <button class="control" onclick="choose('CAM 01',this)">
+      CAM 01
+    </button>
+
+    <button class="control" onclick="choose('CAM 02',this)">
+      CAM 02
+    </button>
+
+    <button class="control" onclick="choose('CAM 03',this)">
+      CAM 03
+    </button>
+
+    <button class="control" onclick="choose('ZOOM',this)">
+      ZOOM
+    </button>
+
+    <button class="control" onclick="choose('SLOW MO',this)">
+      SLOW MO
+    </button>
+
+  </div>
+
+</section>
 
 
 <!-- =====================================================
      FEEDBACK
 ===================================================== -->
 
-<div
-    class="feedback"
-    id="feedback">
+<div class="feedback" id="feedback">
 
-    <div
-        class="feedback-main"
-        id="feedbackMain">
+  <div class="feedback-main" id="feedbackMain">
+    PERFECT CUT!
+  </div>
 
-        PERFECT CUT!
-
-    </div>
-
-    <div
-        class="feedback-sub"
-        id="feedbackSub">
-
-        +500
-
-    </div>
+  <div class="feedback-sub" id="feedbackSub">
+    +500
+  </div>
 
 </div>
-
 
 
 <!-- =====================================================
-     RESULT
+     COMPLETE
 ===================================================== -->
 
-<div id="result">
+<section id="complete" class="screen">
 
-    <div class="result-box">
+  <div class="complete-card">
 
+    <div class="brand">
+      SCENE WRAPPED
+    </div>
 
-        <div class="result-small">
+    <h2 id="completeTitle">
+      STAGE COMPLETE
+    </h2>
 
-            MISSION COMPLETE
+    <div class="complete-score" id="completeScore">
+      0
+    </div>
 
-        </div>
+    <div class="stars" id="stars">
+      ★★★
+    </div>
 
+    <button class="big-btn" onclick="nextStage()">
+      CONTINUE 🎬
+    </button>
 
-        <h1>
+  </div>
 
-            YOUR CUT
-
-        </h1>
-
-
-        <div
-            class="final-score"
-            id="finalScore">
-
-            0
-
-        </div>
-
-
-        <div
-            class="rank"
-            id="rank">
-
-            ROOKIE DIRECTOR
-
-        </div>
+</section>
 
 
-        <div class="result-buttons">
+<!-- =====================================================
+     FINAL
+===================================================== -->
 
+<section id="final" class="screen">
 
-            <button
-                class="result-button again"
-                onclick="location.reload()">
+  <div class="final-card">
 
-                PLAY AGAIN 🎬
+    <div class="final-small">
+      YONAS NICKEE PRESENTS
+    </div>
 
-            </button>
+    <h1>
+      MASTER<br>DIRECTOR
+    </h1>
 
+    <div class="final-stats">
 
-            <button
-                class="result-button home"
-                onclick="goHome()">
+      Director:
+      <b>Yonas Nickee</b><br>
 
-                WEBSITE
+      Best Score:
+      <b id="finalScore">0</b><br>
 
-            </button>
+      Perfect Cuts:
+      <b id="finalCuts">0</b><br>
 
-
-        </div>
+      Missions:
+      <b>5 / 5</b>
 
     </div>
 
-</div>
+    <div class="stars">
+      ★★★★★
+    </div>
 
+    <button class="big-btn" onclick="openStages()">
+      PLAY AGAIN
+    </button>
+
+  </div>
+
+</section>
 
 
 <script>
 
 /* =====================================================
-   GAME VARIABLES
+   STORAGE
 ===================================================== */
+
+let unlocked =
+  Number(localStorage.getItem("yonasDirectorStage")) || 1;
+
+let bestScore =
+  Number(localStorage.getItem("yonasDirectorBest")) || 0;
+
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+let currentStage = 1;
 
 let score = 0;
 
@@ -1651,138 +1202,270 @@ let time = 30;
 
 let combo = 0;
 
-let playing = false;
+let perfectCuts = 0;
+
+let target = "";
 
 let timer = null;
 
-let target = "CAM 01";
+let playing = false;
+
+let memoryTarget = "";
+
+let targetVisible = true;
 
 
 /* =====================================================
-   AVAILABLE SHOTS
+   SHOTS
 ===================================================== */
 
 const shots = [
-
-    "CAM 01",
-
-    "CAM 02",
-
-    "CAM 03",
-
-    "ZOOM",
-
-    "SLOW MO"
-
+  "CAM 01",
+  "CAM 02",
+  "CAM 03",
+  "ZOOM",
+  "SLOW MO"
 ];
 
 
 /* =====================================================
-   CAMERA INFORMATION
+   CAMERA DATA
 ===================================================== */
 
 const cameraData = {
 
-    "CAM 01":{
+  "CAM 01":{
+    name:"CAM 01",
+    type:"WIDE SHOT"
+  },
 
-        name:"CAM 01",
+  "CAM 02":{
+    name:"CAM 02",
+    type:"CLOSE UP"
+  },
 
-        type:"WIDE SHOT"
+  "CAM 03":{
+    name:"CAM 03",
+    type:"SIDE ANGLE"
+  },
 
-    },
+  "ZOOM":{
+    name:"ZOOM",
+    type:"CINEMATIC ZOOM"
+  },
 
-
-    "CAM 02":{
-
-        name:"CAM 02",
-
-        type:"CLOSE UP"
-
-    },
-
-
-    "CAM 03":{
-
-        name:"CAM 03",
-
-        type:"SIDE ANGLE"
-
-    },
-
-
-    "ZOOM":{
-
-        name:"ZOOM",
-
-        type:"CINEMATIC ZOOM"
-
-    },
-
-
-    "SLOW MO":{
-
-        name:"SLOW MO",
-
-        type:"SLOW MOTION"
-
-    }
+  "SLOW MO":{
+    name:"SLOW MO",
+    type:"SLOW MOTION"
+  }
 
 };
 
 
 /* =====================================================
-   START GAME
+   OPEN STAGES
 ===================================================== */
 
-function startGame(){
+function openStages(){
 
-    document
-        .getElementById("intro")
-        .style.display="none";
+  document.getElementById("intro").style.display="none";
+
+  document.getElementById("game").style.display="none";
+
+  document.getElementById("complete").style.display="none";
+
+  document.getElementById("final").style.display="none";
+
+  document.getElementById("stages").style.display="flex";
+
+  updateStageButtons();
+
+}
 
 
-    document
-        .getElementById("game")
-        .style.display="block";
+/* =====================================================
+   UPDATE STAGE BUTTONS
+===================================================== */
+
+function updateStageButtons(){
+
+  for(let i=1;i<=5;i++){
+
+    const btn =
+      document.getElementById("stage"+i);
+
+    if(i <= unlocked){
+
+      btn.classList.remove("locked");
+
+      btn.querySelector("span").textContent =
+        getStageDescription(i);
+
+    }else{
+
+      btn.classList.add("locked");
+
+      btn.querySelector("span").textContent =
+        "LOCKED";
+
+    }
+
+  }
+
+}
 
 
-    score = 0;
+function getStageDescription(stage){
+
+  if(stage===1)
+    return "NEON ENTRY • BEGINNER";
+
+  if(stage===2)
+    return "FAST CUT • HARDER";
+
+  if(stage===3)
+    return "MEMORY SHOT • HARD";
+
+  if(stage===4)
+    return "BOSS SCENE • INSANE";
+
+  return "MASTER OF THE CUT";
+
+}
+
+
+/* =====================================================
+   START STAGE
+===================================================== */
+
+function startStage(stage){
+
+  if(stage > unlocked){
+
+    return;
+
+  }
+
+  currentStage = stage;
+
+  score = 0;
+
+  combo = 0;
+
+  perfectCuts = 0;
+
+  playing = true;
+
+  targetVisible = true;
+
+  document.getElementById("stages").style.display="none";
+
+  document.getElementById("complete").style.display="none";
+
+  document.getElementById("final").style.display="none";
+
+  document.getElementById("game").style.display="block";
+
+  document.getElementById("stageNo").textContent =
+    String(stage).padStart(2,"0");
+
+  setupStage();
+
+  newTarget();
+
+  clearInterval(timer);
+
+  timer = setInterval(countDown,1000);
+
+}
+
+
+/* =====================================================
+   STAGE SETTINGS
+===================================================== */
+
+function setupStage(){
+
+  const character =
+    document.getElementById("character");
+
+  const rain =
+    document.getElementById("rain");
+
+  const weather =
+    document.getElementById("weather");
+
+
+  if(currentStage===1){
 
     time = 30;
 
-    combo = 0;
+    character.style.animationDuration="7s";
 
-    playing = true;
+    rain.style.opacity="0";
 
+    weather.textContent="CLEAR";
 
-    document
-        .getElementById("score")
-        .textContent = score;
-
-
-    document
-        .getElementById("time")
-        .textContent = time;
+  }
 
 
-    document
-        .getElementById("combo")
-        .textContent = combo;
+  if(currentStage===2){
+
+    time = 25;
+
+    character.style.animationDuration="4.5s";
+
+    rain.style.opacity=".25";
+
+    weather.textContent="RAIN";
+
+  }
 
 
-    newTarget();
+  if(currentStage===3){
+
+    time = 25;
+
+    character.style.animationDuration="4s";
+
+    rain.style.opacity=".35";
+
+    weather.textContent="MEMORY MODE";
+
+  }
 
 
-    clearInterval(timer);
+  if(currentStage===4){
+
+    time = 22;
+
+    character.style.animationDuration="3.2s";
+
+    rain.style.opacity=".5";
+
+    weather.textContent="BOSS SCENE";
+
+  }
 
 
-    timer = setInterval(
+  if(currentStage===5){
 
-        countdown,
+    time = 30;
 
-        1000
+    character.style.animationDuration="2.7s";
 
-    );
+    rain.style.opacity=".65";
+
+    weather.textContent="YONAS MODE";
+
+  }
+
+
+  document.getElementById("time").textContent=time;
+
+  document.getElementById("score").textContent=score;
+
+  document.getElementById("combo").textContent=combo;
 
 }
 
@@ -1791,28 +1474,19 @@ function startGame(){
    COUNTDOWN
 ===================================================== */
 
-function countdown(){
+function countDown(){
 
-    if(!playing){
+  if(!playing) return;
 
-        return;
+  time--;
 
-    }
+  document.getElementById("time").textContent=time;
 
+  if(time<=0){
 
-    time--;
+    finishStage();
 
-
-    document
-        .getElementById("time")
-        .textContent = time;
-
-
-    if(time <= 0){
-
-        endGame();
-
-    }
+  }
 
 }
 
@@ -1823,36 +1497,62 @@ function countdown(){
 
 function newTarget(){
 
-    target =
-        shots[
-            Math.floor(
-                Math.random()
-                *
-                shots.length
-            )
-        ];
+  if(!playing) return;
 
 
-    document
-        .getElementById("target")
-        .textContent = target;
+  target =
+    shots[
+      Math.floor(
+        Math.random()*shots.length
+      )
+    ];
 
 
-    /* Small signal */
-
-    const signal =
-        document
-        .getElementById("signal");
+  memoryTarget = target;
 
 
-    signal.style.display="flex";
+  const targetElement =
+    document.getElementById("target");
 
+
+  targetElement.textContent = target;
+
+  targetElement.style.opacity="1";
+
+  targetVisible=true;
+
+
+  /* Stage 3+ memory mechanic */
+
+  if(currentStage>=3){
 
     setTimeout(function(){
 
-        signal.style.display="none";
+      if(playing){
 
-    },350);
+        targetElement.style.opacity="0";
+
+        targetVisible=false;
+
+      }
+
+    },1100);
+
+  }
+
+
+  /* Signal */
+
+  const signal =
+    document.getElementById("signal");
+
+  signal.style.display="flex";
+
+  setTimeout(function(){
+
+    signal.style.display="none";
+
+  },350);
 
 }
 
@@ -1861,131 +1561,127 @@ function newTarget(){
    CHOOSE SHOT
 ===================================================== */
 
-function chooseShot(
+function choose(shot,button){
 
-    shot,
-
-    button
-
-){
-
-    if(!playing){
-
-        return;
-
-    }
+  if(!playing) return;
 
 
-    /* Remove old states */
+  document
+    .querySelectorAll(".control")
+    .forEach(function(btn){
 
-    document
-        .querySelectorAll(".control")
-        .forEach(function(btn){
+      btn.classList.remove(
+        "correct",
+        "wrong"
+      );
 
-            btn.classList.remove(
-                "correct",
-                "wrong"
-            );
-
-        });
+    });
 
 
-    /* CORRECT */
-
-    if(shot === target){
-
-        combo++;
+  let correct =
+    shot === memoryTarget;
 
 
-        let points =
-            500 +
-            (
-                combo * 100
-            );
+  if(correct){
+
+    combo++;
+
+    perfectCuts++;
 
 
-        score += points;
+    let multiplier = 1;
 
 
-        button
-            .classList
-            .add("correct");
+    if(combo>=10)
+      multiplier=5;
+
+    else if(combo>=7)
+      multiplier=3;
+
+    else if(combo>=4)
+      multiplier=2;
 
 
-        showFeedback(
-
-            "PERFECT CUT!",
-
-            "+" + points,
-
-            true
-
-        );
+    let points =
+      (500 + combo*100)
+      * multiplier;
 
 
-        changeCamera(shot);
-
-    }
+    score += points;
 
 
-    /* WRONG */
-
-    else{
-
-        combo = 0;
+    button.classList.add("correct");
 
 
-        score -= 100;
+    showFeedback(
+      "PERFECT CUT!",
+      "+"+points+"  ×"+multiplier,
+      true
+    );
 
 
-        if(score < 0){
-
-            score = 0;
-
-        }
+    changeCamera(shot);
 
 
-        button
-            .classList
-            .add("wrong");
+    /* Fever */
 
+    if(combo===10){
 
-        showFeedback(
-
-            "MISSED!",
-
-            "-100",
-
-            false
-
-        );
+      showFeedback(
+        "DIRECTOR FEVER!",
+        "×5 MODE",
+        true
+      );
 
     }
 
+  }
 
-    document
-        .getElementById("score")
-        .textContent = score;
+  else{
 
+    combo=0;
 
-    document
-        .getElementById("combo")
-        .textContent = combo;
-
-
-    setTimeout(function(){
-
-        button
-            .classList
-            .remove(
-                "correct",
-                "wrong"
-            );
-
-    },500);
+    let penalty =
+      currentStage>=4
+      ? 300
+      : 150;
 
 
-    newTarget();
+    score -= penalty;
+
+
+    if(score<0)
+      score=0;
+
+
+    button.classList.add("wrong");
+
+
+    showFeedback(
+      "MISSED!",
+      "-"+penalty,
+      false
+    );
+
+  }
+
+
+  document.getElementById("score").textContent=score;
+
+  document.getElementById("combo").textContent=combo;
+
+
+  setTimeout(function(){
+
+    button.classList.remove(
+      "correct",
+      "wrong"
+    );
+
+  },450);
+
+
+  newTarget();
 
 }
 
@@ -1996,99 +1692,79 @@ function chooseShot(
 
 function changeCamera(shot){
 
-    const data =
-        cameraData[shot];
+  const data =
+    cameraData[shot];
 
 
-    document
-        .getElementById("cameraName")
-        .textContent = data.name;
+  document.getElementById("cameraName")
+    .textContent=data.name;
+
+  document.getElementById("cameraType")
+    .textContent=data.type;
 
 
-    document
-        .getElementById("cameraType")
-        .textContent = data.type;
+  const character =
+    document.getElementById("character");
+
+  const cinema =
+    document.getElementById("cinema");
 
 
-    const subject =
-        document
-        .getElementById("subject");
+  if(shot==="ZOOM"){
+
+    character.style.transform="scale(2)";
+
+    setTimeout(function(){
+
+      character.style.transform="scale(1)";
+
+    },650);
+
+  }
 
 
-    /* ZOOM */
+  if(shot==="CAM 02"){
 
-    if(shot === "ZOOM"){
+    character.style.transform="scale(1.4)";
 
-        subject.style.transform =
-            "scale(2)";
+    setTimeout(function(){
 
+      character.style.transform="scale(1)";
 
-        setTimeout(function(){
+    },500);
 
-            subject.style.transform =
-                "scale(1)";
-
-        },700);
-
-    }
+  }
 
 
-    /* SLOW MOTION */
+  if(shot==="CAM 03"){
 
-    if(shot === "SLOW MO"){
+    cinema.style.transform="translateX(8px)";
 
-        subject.style.animationDuration =
-            "16s";
+    setTimeout(function(){
 
+      cinema.style.transform="translateX(0)";
 
-        setTimeout(function(){
+    },180);
 
-            subject.style.animationDuration =
-                "7s";
-
-        },1500);
-
-    }
+  }
 
 
-    /* CAM 02 CLOSE UP */
+  if(shot==="SLOW MO"){
 
-    if(shot === "CAM 02"){
+    character.style.animationDuration="12s";
 
-        subject.style.transform =
-            "scale(1.35)";
+    setTimeout(function(){
 
+      character.style.animationDuration =
+        currentStage===1 ? "7s" :
+        currentStage===2 ? "4.5s" :
+        currentStage===3 ? "4s" :
+        currentStage===4 ? "3.2s" :
+        "2.7s";
 
-        setTimeout(function(){
+    },1300);
 
-            subject.style.transform =
-                "scale(1)";
-
-        },600);
-
-    }
-
-
-    /* CAM 03 */
-
-    if(shot === "CAM 03"){
-
-        document
-            .querySelector(".cinema")
-            .style.transform =
-                "translateX(8px)";
-
-
-        setTimeout(function(){
-
-            document
-                .querySelector(".cinema")
-                .style.transform =
-                    "translateX(0)";
-
-        },180);
-
-    }
+  }
 
 }
 
@@ -2097,156 +1773,241 @@ function changeCamera(shot){
    FEEDBACK
 ===================================================== */
 
-function showFeedback(
+function showFeedback(main,sub,correct){
 
-    main,
+  const box =
+    document.getElementById("feedback");
 
-    sub,
+  const mainText =
+    document.getElementById("feedbackMain");
 
-    correct
-
-){
-
-    const box =
-        document
-        .getElementById("feedback");
+  const subText =
+    document.getElementById("feedbackSub");
 
 
-    const mainText =
-        document
-        .getElementById("feedbackMain");
+  mainText.textContent=main;
+
+  subText.textContent=sub;
 
 
-    const subText =
-        document
-        .getElementById("feedbackSub");
+  if(correct){
+
+    mainText.style.color="#00ffc8";
+
+    mainText.style.textShadow=
+      "0 0 30px #00ffc8";
+
+  }else{
+
+    mainText.style.color="#ff3c8d";
+
+    mainText.style.textShadow=
+      "0 0 30px #ff006a";
+
+  }
 
 
-    mainText.textContent = main;
-
-    subText.textContent = sub;
+  box.classList.add("show");
 
 
-    if(correct){
+  setTimeout(function(){
 
-        mainText.style.color =
-            "#00ffc8";
+    box.classList.remove("show");
 
-        mainText.style.textShadow =
-            "0 0 30px #00ffc8";
-
-    }
-
-    else{
-
-        mainText.style.color =
-            "#ff3c8d";
-
-        mainText.style.textShadow =
-            "0 0 30px #ff006a";
-
-    }
-
-
-    box.classList.add("show");
-
-
-    setTimeout(function(){
-
-        box.classList.remove("show");
-
-    },650);
+  },650);
 
 }
 
 
 /* =====================================================
-   END GAME
+   FINISH STAGE
 ===================================================== */
 
-function endGame(){
+function finishStage(){
 
-    playing = false;
+  if(!playing) return;
 
+  playing=false;
 
-    clearInterval(timer);
-
-
-    document
-        .getElementById("game")
-        .style.display="none";
+  clearInterval(timer);
 
 
-    document
-        .getElementById("result")
-        .style.display="flex";
+  /* Save best score */
+
+  if(score > bestScore){
+
+    bestScore=score;
+
+    localStorage.setItem(
+      "yonasDirectorBest",
+      bestScore
+    );
+
+  }
 
 
-    document
-        .getElementById("finalScore")
-        .textContent = score;
+  /* Final stage */
+
+  if(currentStage===5){
+
+    showFinal();
+
+    return;
+
+  }
 
 
-    let rank;
+  /* Unlock next */
+
+  if(currentStage===unlocked){
+
+    unlocked++;
+
+    localStorage.setItem(
+      "yonasDirectorStage",
+      unlocked
+    );
+
+  }
 
 
-    if(score >= 8000){
+  document.getElementById("game").style.display="none";
 
-        rank =
-            "MASTER DIRECTOR ★★★★★";
-
-    }
-
-    else if(score >= 5000){
-
-        rank =
-            "PRO DIRECTOR ★★★★";
-
-    }
-
-    else if(score >= 2500){
-
-        rank =
-            "RISING DIRECTOR ★★★";
-
-    }
-
-    else if(score >= 1000){
-
-        rank =
-            "ASSISTANT DIRECTOR ★★";
-
-    }
-
-    else{
-
-        rank =
-            "ROOKIE DIRECTOR ★";
-
-    }
+  document.getElementById("complete").style.display="flex";
 
 
-    document
-        .getElementById("rank")
-        .textContent = rank;
+  document.getElementById("completeScore")
+    .textContent=score;
+
+
+  let stars=1;
+
+
+  if(score>=1500)
+    stars=2;
+
+  if(score>=3000)
+    stars=3;
+
+  if(score>=5000)
+    stars=4;
+
+  if(score>=8000)
+    stars=5;
+
+
+  document.getElementById("stars")
+    .textContent="★".repeat(stars);
+
+
+  document.getElementById("completeTitle")
+    .textContent=
+      "STAGE "+String(currentStage).padStart(2,"0")+" COMPLETE";
 
 }
 
 
 /* =====================================================
-   WEBSITE BUTTON
+   NEXT STAGE
 ===================================================== */
 
-function goHome(){
+function nextStage(){
 
-    window.location.href =
-        "index.html";
+  if(currentStage<5){
+
+    startStage(currentStage+1);
+
+  }else{
+
+    showFinal();
+
+  }
 
 }
+
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+function showFinal(){
+
+  document.getElementById("game").style.display="none";
+
+  document.getElementById("complete").style.display="none";
+
+  document.getElementById("final").style.display="flex";
+
+
+  document.getElementById("finalScore")
+    .textContent=bestScore;
+
+
+  document.getElementById("finalCuts")
+    .textContent=perfectCuts;
+
+}
+
+
+/* =====================================================
+   KEYBOARD SUPPORT
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(!playing) return;
+
+
+    const keys={
+
+      "1":"CAM 01",
+      "2":"CAM 02",
+      "3":"CAM 03",
+      "z":"ZOOM",
+      "Z":"ZOOM",
+      "s":"SLOW MO",
+      "S":"SLOW MO"
+
+    };
+
+
+    if(keys[e.key]){
+
+      const buttons =
+        document.querySelectorAll(".control");
+
+
+      const index = {
+
+        "CAM 01":0,
+        "CAM 02":1,
+        "CAM 03":2,
+        "ZOOM":3,
+        "SLOW MO":4
+
+      }[keys[e.key]];
+
+
+      choose(
+        keys[e.key],
+        buttons[index]
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   INITIAL STAGE STATE
+===================================================== */
+
+updateStageButtons();
 
 </script>
 
-
 </body>
-
-    </html>
+            </html>
